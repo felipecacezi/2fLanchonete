@@ -14,42 +14,93 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
        
     </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-   
-    <div class="relative">
-    
 
-    <section class="bg-yellow-50 overflow-hidden lg:w-screen lg:h-screen">
-        <div class="flex flex-col lg:flex-row lg:items-stretch lg:min-h-[800px] lg:w-screen lg:h-screen">
-            <div class="relative flex items-center justify-center w-full lg:order-2 lg:w-7/12">
-                <div class="absolute bottom-0 right-0 hidden lg:block">
-                    <img class="object-contain w-auto h-48" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/curved-lines.png" alt="" />
-                </div>
-            </div>
-
-            <div class="relative w-full overflow-hidden lg:order-1 h-96 lg:h-auto lg:w-5/12">
-                <div class="absolute inset-0">
-                    <img class="object-cover w-full h-full scale-150" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/man-working-on-laptop.jpg" alt="" />
-                </div>
-
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-
-                <div class="absolute bottom-0 left-0">
-                    <div class="p-4 sm:p-6 lg:p-8">
-                        <div class="flex items-center">
-                            <svg class="w-10 h-10 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                            </svg>
-                            <h2 class="font-bold text-white text-7xl ml-2.5">2F-Soluções</h2>
+    <body class="font-sans antialiased dark:bg-black dark:text-white/50">   
+        
+        <div class="relative">
+        
+            <section class="bg-yellow-50 overflow-hidden lg:w-screen lg:h-screen">
+                    
+                <div class="flex flex-col lg:flex-row lg:items-stretch lg:min-h-[800px] lg:w-screen lg:h-screen">
+                    
+                    <div class="relative flex items-center justify-center w-full lg:order-2 lg:w-7/12">
+                        
+                        <div class="absolute bottom-0 right-0 hidden lg:block">
+                            <img class="object-contain w-auto h-48" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/curved-lines.png" alt="" />
                         </div>
-                        <p class="max-w-xs mt-1.5 text-xl text-white">Facilitando a gestão do seu restaurante.</p>
+                        
+                        <div class="m-5 lg:bg-stone-200/70 lg:w-4/6 p-3 rounded-xl">
+                            <!-- Session Status -->
+                            <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="text-center">
+                                    <h1 class="font-bold text-4xl text-gray-800">Entrar</h1>
+                                </div>
+                                <!-- Email Address -->
+                                <div>
+                                    <x-input-label for="email" :value="__('E-mail')" />
+                                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                </div>
+
+                                <!-- Password -->
+                                <div class="mt-4">
+                                    <x-input-label for="password" :value="__('Senha')" />
+
+                                    <x-text-input id="password" class="block mt-1 w-full"
+                                                    type="password"
+                                                    name="password"
+                                                    required autocomplete="current-password" />
+
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                </div>
+
+                                <!-- Remember Me -->
+                                <div class="block mt-4">
+                                    <label for="remember_me" class="inline-flex items-center">
+                                        <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
+                                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Lembrar de mim') }}</span>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-end mt-4">
+                                    @if (Route::has('password.request'))
+                                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                                            {{ __('Esqueceu sua senha?') }}
+                                        </a>
+                                    @endif
+
+                                    <x-primary-button class="ms-3">
+                                        {{ __('Entrar') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="relative w-full overflow-hidden lg:order-1 h-96 lg:h-auto lg:w-5/12">
+                        <div class="absolute inset-0">
+                            <img class="object-cover w-full h-full scale-150" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/man-working-on-laptop.jpg" alt="" />
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+
+                        <div class="absolute bottom-0 left-0">
+                            <div class="p-4 sm:p-6 lg:p-8">
+                                <div class="flex items-center">
+                                    <svg class="w-10 h-10 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                                    </svg>
+                                    <h2 class="font-bold text-white text-4xl ml-2.5">2F-Soluções</h2>
+                                </div>
+                                <p class="max-w-xs mt-1.5 text-x text-white">Facilitando a gestão do seu restaurante.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-</div>
-
-
     </body>
 </html>
