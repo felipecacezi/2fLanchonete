@@ -26,8 +26,14 @@ Route::middleware([
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+        Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     });
 
 });
+
+Route::get('/ping', function(){
+    return 'pong';
+})->name('ping');
 
 require __DIR__.'/auth.php';

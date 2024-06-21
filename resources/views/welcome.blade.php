@@ -4,103 +4,71 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>2FSoluções</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-        <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-       
+        
     </head>
+    <body class="">
+        <section class="py-5 relative">
+            <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
 
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">   
-        
-        <div class="relative">
-        
-            <section class="bg-yellow-50 overflow-hidden lg:w-screen lg:h-screen">
-                    
-                <div class="flex flex-col lg:flex-row lg:items-stretch lg:min-h-[800px] lg:w-screen lg:h-screen">
-                    
-                    <div class="relative flex items-center justify-center w-full lg:order-2 lg:w-7/12">
-                        
-                        <div class="absolute bottom-0 right-0 hidden lg:block">
-                            <img class="object-contain w-auto h-48" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/curved-lines.png" alt="" />
-                        </div>
-                        
-                        <div class="m-5 lg:bg-stone-200/70 lg:w-4/6 p-3 rounded-xl">
-                            <!-- Session Status -->
-                            <x-auth-session-status class="mb-4" :status="session('status')" />
-
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="text-center">
-                                    <h1 class="font-bold text-4xl text-gray-800">Entrar</h1>
-                                </div>
-                                <!-- Email Address -->
-                                <div>
-                                    <x-input-label for="email" :value="__('E-mail')" />
-                                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                </div>
-
-                                <!-- Password -->
-                                <div class="mt-4">
-                                    <x-input-label for="password" :value="__('Senha')" />
-
-                                    <x-text-input id="password" class="block mt-1 w-full"
-                                                    type="password"
-                                                    name="password"
-                                                    required autocomplete="current-password" />
-
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                                </div>
-
-                                <!-- Remember Me -->
-                                <div class="block mt-4">
-                                    <label for="remember_me" class="inline-flex items-center">
-                                        <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Lembrar de mim') }}</span>
-                                    </label>
-                                </div>
-
-                                <div class="flex items-center justify-end mt-4">
-                                    @if (Route::has('password.request'))
-                                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                                            {{ __('Esqueceu sua senha?') }}
-                                        </a>
-                                    @endif
-
-                                    <x-primary-button class="ms-3">
-                                        {{ __('Entrar') }}
-                                    </x-primary-button>
-                                </div>
-                            </form>
-                        </div>
+                <div class="flex flex-col justify-center items-center rounded-3xl mb-8">
+                    <div class="img box mb-5 w-mx h-96 px-5 overflow-hidden flex">
+                        <img src="https://www.giroamericana.com.br/arquivos/noticias/9383/billy-boo-lanchonete-tematica-em-americana-lanca-rodizio-de-mini-burgers-nas-tercas-feiras-a-partir-de-r-49-90.jpg" alt="speaker image" class="md:w-max lg:w-max rounded-3xl">
                     </div>
-
-                    <div class="relative w-full overflow-hidden lg:order-1 h-96 lg:h-auto lg:w-5/12">
-                        <div class="absolute inset-0">
-                            <img class="object-cover w-full h-full scale-150" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/man-working-on-laptop.jpg" alt="" />
-                        </div>
-
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-
-                        <div class="absolute bottom-0 left-0">
-                            <div class="p-4 sm:p-6 lg:p-8">
-                                <div class="flex items-center">
-                                    <svg class="w-10 h-10 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                    </svg>
-                                    <h2 class="font-bold text-white text-4xl ml-2.5">2F-Soluções</h2>
-                                </div>
-                                <p class="max-w-xs mt-1.5 text-x text-white">Facilitando a gestão do seu restaurante.</p>
-                            </div>
-                        </div>
+                    <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">
+                        Billy Boo
+                    </h2>
+                    <div>
+                        <p>
+                            Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.
+                            Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. Mais vale um bebadis conhecidiss,
+                            que um alcoolatra anonimis. Eu nunca mais boto a boca num copo de cachaça, agora eu só uso canudis!
+                            Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.
+                            Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. Mais vale um bebadis conhecidiss,
+                            que um alcoolatra anonimis. Eu nunca mais boto a boca num copo de cachaça, agora eu só uso canudis!
+                        </p>
                     </div>
                 </div>
-            </section>
-        </div>
+                
+                <livewire:operating-schedule />
+
+                <!-- @ foreach ($menus[0] as $menu) -->
+                    <div class="mb-5">
+                        <h5 class="font-manrope font-bold text-2xl leading-9 text-gray-900">
+                            <!-- { { $menu['virtual_menu_title'] }} -->
+                        </h5>
+                    </div>
+
+                    <!-- @ foreach ($menu['products'] as $keyProduct => $product) -->
+
+                        <livewire:product-menu />
+                            <!-- id="< ?php echo $menu['id'].'_'.$keyProduct; ?>"
+                            productName="< ?php echo $product['product_name']; ?>" 
+                            price="< ?php echo $product['product_price']; ?>" 
+                            obs="< ?php echo $product['product_description']; ?>"
+                            productImage="< ?php echo $product['product_image']; ?>"/> -->
+                    <!-- @ endforeach
+                @ endforeach -->
+
+                <div class="max-lg:max-w-lg max-lg:mx-auto">
+                    <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
+                        SubTotal: R$ <span id="subtotal">0,00</span>
+                    </h6>
+                </div>
+
+                <div class="max-lg:max-w-lg max-lg:mx-auto mt-5">
+                    <button id="btn-make-order"
+                        class="rounded-full py-4 px-6 bg-indigo-600 text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 ">Fazer Pedido</button>
+                </div>
+
+            </div>
+        </section>
+        <script src="{{ asset('/js/livewire/menu/menu.js') }}"></script>
     </body>
 </html>

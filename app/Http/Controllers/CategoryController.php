@@ -12,10 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
         return view(
             'category.list',
-            compact('categories')
         );
     }
 
@@ -24,7 +22,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'category.create',
+        );
     }
 
     /**
@@ -32,7 +32,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $newCategory = Category::create($request->all())->id;
+
+            return response(
+                [
+                    'msg' => 'Categoria criada com sucesso.',
+                    'data' => [
+                        'category_id' => $newCategory
+                    ],
+                    'status' => 201
+                ],
+                201,                
+            );
+
+        } catch (\Throwable $th) {
+            throw new \Exception(
+                "Ocorreu um erro ao gravar a categoria - ( Cód. 01 )", 
+                500
+            );
+        }        
     }
 
     /**
@@ -46,9 +65,13 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Category $category, $id)
     {
-        //
+        $arCategory = Category::find($id);
+        return view(
+            'category.create',
+            compact('arCategory')
+        );
     }
 
     /**
