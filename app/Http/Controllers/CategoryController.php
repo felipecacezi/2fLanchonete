@@ -48,7 +48,7 @@ class CategoryController extends Controller
 
         } catch (\Throwable $th) {
             throw new \Exception(
-                "Ocorreu um erro ao gravar a categoria - ( Cód. 01 )", 
+                "Ocorreu um erro ao gravar a categoria", 
                 500
             );
         }        
@@ -69,7 +69,7 @@ class CategoryController extends Controller
     {
         $arCategory = Category::find($id);
         return view(
-            'category.create',
+            'category.edit',
             compact('arCategory')
         );
     }
@@ -77,11 +77,30 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        try {
+            $arCategory = Category::find($request->id);
+            if (!$arCategory) {
+                throw new \Exception(
+                    "Impossível editar a categoria, motivo: categoria não encontrada", 
+                    404
+                );
+            }
+            unset($request->id);
+            $arCategory->update($request->all());
+            return response(
+                [
+                    'msg' => 'Categoria editada com sucesso.',
+                    'data' => [],
+                    'status' => 201
+                ],
+                201,                
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception("Ocorreu um erro ao editar a categoria", 500);
+        }
     }
-
     /**
      * Remove the specified resource from storage.
      */

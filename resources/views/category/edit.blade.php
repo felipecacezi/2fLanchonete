@@ -18,11 +18,13 @@
                 bg-gray-200
                 p-2
                 rounded-lg">
-                <x-primary-button>
+                <x-primary-button id="btnStore" 
+                    type="button">
                     {{ __('Gravar') }}
                 </x-primary-button>
 
-                <x-danger-button>
+                <x-danger-button id="btnCancel"
+                    type="button">
                     {{ __('Cancelar') }}
                 </x-danger-button>
             </div>
@@ -32,6 +34,8 @@
                 p-2
                 rounded-lg">
 
+                <input type="hidden" id="category_id" name="category_id" value="{{ $arCategory['id'] }}">
+
                 <div class="">
                     <x-input-label for="category_name" 
                         :value="__('Nome')"/>
@@ -40,7 +44,8 @@
                         type="text" 
                         class="mt-1 block w-full" 
                         autocomplete="current-password"
-                        placeholder="Nome da categoria" />
+                        placeholder="Nome da categoria" 
+                        value="{{ $arCategory['category_name'] }}"/>
                 </div>
 
                 <div class="mt-3">
@@ -49,13 +54,14 @@
                         <input id="catedory_active" 
                         type="checkbox" 
                         class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" 
-                        name="catedory_active">
+                        name="catedory_active"
+                        {{ $arCategory['category_active'] == 'a' ? 'checked' : '' }} />
                         <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Ativo') }}</span>
                     </label>
                 </div>
-
             </div>
 
         </div>
     </form>
+    @vite('resources/js/category/edit.js')
 </x-app-layout>
