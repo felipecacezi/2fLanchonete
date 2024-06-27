@@ -104,8 +104,29 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, $id)
     {
-        //
+        try {
+            $arCategory = Category::find($id);
+            if (!$arCategory) {
+                throw new \Exception(
+                    "Impossível deletar a categoria, motivo: categoria não encontrada", 
+                    404
+                );
+            }
+            $arCategory->update([
+                'category_active' => 'i'
+            ]);
+            return response(
+                [
+                    'msg' => 'Categoria deletada com sucesso.',
+                    'data' => [],
+                    'status' => 201
+                ],
+                201,                
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception("Ocorreu um erro ao deletar a categoria", 500);
+        }
     }
 }

@@ -35,6 +35,7 @@ Route::middleware([
 
         Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
         Route::put('/category', [CategoryController::class, 'update'])->name('category.update');
+        Route::delete('/category/{id}/destroy', [CategoryController::class, 'destroy'])->name('category.delete');        
         // end category
     });
 

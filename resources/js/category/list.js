@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Delete a record
     table.on('click', 'td.editor-delete button', function (e) {
         const categoryId = e.currentTarget.getAttribute('data-id');
-        axios.delete('/category/' + categoryId)
+        axios.delete('/category/' + categoryId +'/destroy')
             .then(response => {
                 table.ajax.reload(null, false);
                 Swal.fire({
