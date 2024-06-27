@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Edit record
     table.on('click', 'td.editor-edit button', function (e) {
         const categoryId = e.currentTarget.getAttribute('data-id');
-        window.location.href = `/category/${categoryId}`;        
+        window.location.href = `/category/${categoryId}/edit`;        
     });
     
     // Delete a record
