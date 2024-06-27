@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
@@ -25,6 +26,8 @@ Route::middleware([
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+        Route::get('/datatable/category', [DatatableController::class, 'category'])->name('datatable.category');
         Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
         Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
