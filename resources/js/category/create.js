@@ -2,7 +2,7 @@
 import Swal from 'sweetalert2';
 
 const elmntName = document.getElementById('category_name');
-const elmntActive = document.getElementById('catedory_active');
+const elmntActive = document.getElementById('category_active');
 const elmntStore = document.getElementById('btnStore');
 const elmntCancel = document.getElementById('btnCancel');
 
@@ -11,7 +11,7 @@ elmntStore.addEventListener('click', ()=>{
         "/category", 
         {
             'category_name': elmntName.value,
-            'category_active': elmntActive.checked ? '1' : '0',
+            'category_active': elmntActive.checked ? 'a' : 'i',
         }, 
         {
             headers: {
@@ -39,5 +39,5 @@ elmntStore.addEventListener('click', ()=>{
 });
 
 elmntCancel.addEventListener('click', ()=>{
-    console.log('cancel')
+    window.location.href = '/category';
 });
