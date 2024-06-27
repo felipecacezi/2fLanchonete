@@ -30,7 +30,11 @@ elmntStore.addEventListener('click', ()=>{
             icon: 'success',
             confirmButtonText: 'Fechar',
             confirmButtonColor: "#1f2937",
-        })        
+        }).then((ret)=>{
+            if (ret.isConfirmed) {
+                window.location.href = `/category`;
+            }
+        })   
     }).catch((error) => {
         Swal.fire({
             title: 'Erro',
