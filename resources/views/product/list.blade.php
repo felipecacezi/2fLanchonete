@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Categorias') }}
+            {{ __('Produtos') }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
 
         <div class="w-full">
             <x-primary-button type="button"
-                id="btnNewCategory">
+                id="btnNewProduct">
                 {{ __('Novo') }}
             </x-primary-button>
         </div>
@@ -37,6 +37,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     @vite([
-        'resources/js/category/list.js'
+        'resources/js/product/list.js'
     ])
 </x-app-layout>
