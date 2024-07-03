@@ -47,6 +47,7 @@ Route::middleware([
 
         Route::post('/product', [ProductController::class, 'store'])->name('product.store');
         Route::put('/product', [ProductController::class, 'update'])->name('product.update');
+        Route::delete('/product/{id}/destroy', [ProductController::class, 'destroy'])->name('product.delete');
 
         //end product
     });

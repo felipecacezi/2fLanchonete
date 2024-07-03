@@ -110,8 +110,29 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request, $id)
     {
-        //
+        try {
+            $arProduct = Product::find($id);
+            if (!$arProduct) {
+                throw new \Exception(
+                    "Impossível inativar o produto, motivo: produto não encontrado", 
+                    404
+                );
+            }
+            $arProduct->update([
+                'product_active' => 'i'
+            ]);
+            return response(
+                [
+                    'msg' => 'Produto inativado com sucesso.',
+                    'data' => [],
+                    'status' => 201
+                ],
+                201,                
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception("Ocorreu um erro ao inativar o produto", 500);
+        }
     }
 }

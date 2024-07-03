@@ -58,14 +58,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Edit record
     table.on('click', 'td.editor-edit button', function (e) {
-        const categoryId = e.currentTarget.getAttribute('data-id');
-        window.location.href = `/product/${categoryId}/edit`;        
+        const productId = e.currentTarget.getAttribute('data-id');
+        window.location.href = `/product/${productId}/edit`;        
     });
     
     // Delete a record
     table.on('click', 'td.editor-delete button', function (e) {
-        const categoryId = e.currentTarget.getAttribute('data-id');
-        axios.delete('/product/' + categoryId +'/destroy')
+        const productId = e.currentTarget.getAttribute('data-id');
+        axios.delete('/product/' + productId +'/destroy')
             .then(response => {
                 table.ajax.reload(null, false);
                 Swal.fire({
