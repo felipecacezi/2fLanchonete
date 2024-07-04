@@ -2,21 +2,21 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const  handleNewCategory = ()=>{
-    window.location.href = '/category/create';
+const  handleNewProduct = ()=>{
+    window.location.href = '/product/create';
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
     let table = new DataTable('#myTable', {
         ajax: {
-            url: '/datatable/category',
+            url: '/datatable/product',
             dataSrc: '',
         },
         columns: [
             { data: 'id' },
-            { data: 'category_name' },
-            { data: 'category_active' },
+            { data: 'product_name' },
+            { data: 'product_active' },
             {
                 data: null,
                 className: 'dt-center editor-edit',
@@ -58,14 +58,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Edit record
     table.on('click', 'td.editor-edit button', function (e) {
-        const categoryId = e.currentTarget.getAttribute('data-id');
-        window.location.href = `/category/${categoryId}/edit`;        
+        const productId = e.currentTarget.getAttribute('data-id');
+        window.location.href = `/product/${productId}/edit`;        
     });
     
     // Delete a record
     table.on('click', 'td.editor-delete button', function (e) {
-        const categoryId = e.currentTarget.getAttribute('data-id');
-        axios.delete('/category/' + categoryId +'/destroy')
+        const productId = e.currentTarget.getAttribute('data-id');
+        axios.delete('/product/' + productId +'/destroy')
             .then(response => {
                 table.ajax.reload(null, false);
                 Swal.fire({
@@ -86,6 +86,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
             });
     });
 
-    document.getElementById('btnNewCategory').addEventListener('click', handleNewCategory);
+    document.getElementById('btnNewProduct').addEventListener('click', handleNewProduct);
 
 });
