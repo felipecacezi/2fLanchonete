@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DatatableController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DatatableController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use App\Http\Controllers\MenuController;
 
 Route::middleware([
     'web',
@@ -14,9 +16,9 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    //menu
+    Route::get('/', [MenuController::class, 'index'])->name('menu.index');
+    //end menu
 
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -48,14 +50,15 @@ Route::middleware([
         Route::post('/product', [ProductController::class, 'store'])->name('product.store');
         Route::put('/product', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/{id}/destroy', [ProductController::class, 'destroy'])->name('product.delete');
-
         //end product
     });
 
 });
 
-Route::get('/ping', function(){
-    return 'pong';
-})->name('ping');
+//files
+Route::get('/file/{id}', [FileController::class, 'getCdn'])->name('file.cdn');
+Route::post('/file', [FileController::class, 'store'])->name('file.store');
+Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('file.destroy');
+//end files
 
 require __DIR__.'/auth.php';
