@@ -19,7 +19,7 @@ class FileController extends Controller
    {
         try {
             $fileStored = Storage::put(
-                "files/{$request->tenantId}", 
+                "{$request->tenantId}", 
                 $request->file('file')
             );
 
