@@ -13,5 +13,11 @@ class Product extends Model
         'product_description',
         'product_price',
         'product_active',
+        'file_id'
     ];
+
+    public function file()
+    {
+        return $this->belongsTo(File::class);
+    }
 }

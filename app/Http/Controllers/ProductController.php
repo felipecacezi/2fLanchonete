@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Product;
 use App\Helpers\Currency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\FileController;
 
 class ProductController extends Controller
 {
@@ -65,7 +70,8 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
+    {        
+        $fileController = new FileController();
         $arProduct = Product::find($id);
         $arProduct->toArray();
         $arProduct['product_price'] = Currency::convertCentsToReal($arProduct['product_price']);
@@ -102,7 +108,6 @@ class ProductController extends Controller
                 201,                
             );
         } catch (\Throwable $th) {
-            dd($th);
             throw new \Exception("Ocorreu um erro ao editar o produto", 500);
         }
     }
