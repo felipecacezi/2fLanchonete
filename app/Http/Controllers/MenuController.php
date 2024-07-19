@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Helpers\Currency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -12,8 +14,15 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('welcome', compact('products'));
+        $products = Product::join('files', 'products.file_id', '=', 'files.id')->get()->toArray();
+        foreach ($products as $keyProd => &$product) {
+            $product['productImgUrl'] = Storage::url($product['file_path']);
+            $product['product_price'] = Currency::convertCentsToReal($product['product_price']);
+        }
+        return view(
+            'welcome', 
+            compact('products')
+        );
     }
 
     /**

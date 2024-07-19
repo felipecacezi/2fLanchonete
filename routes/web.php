@@ -51,14 +51,15 @@ Route::middleware([
         Route::put('/product', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/{id}/destroy', [ProductController::class, 'destroy'])->name('product.delete');
         //end product
+
+        //files
+        Route::get('/file/{id}', [FileController::class, 'getCdn'])->name('file.cdn');
+        Route::post('/file', [FileController::class, 'store'])->name('file.store');
+        Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('file.destroy');
+        //end files
+        
     });
 
 });
-
-//files
-Route::get('/file/{id}', [FileController::class, 'getCdn'])->name('file.cdn');
-Route::post('/file', [FileController::class, 'store'])->name('file.store');
-Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('file.destroy');
-//end files
 
 require __DIR__.'/auth.php';
