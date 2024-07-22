@@ -71,11 +71,167 @@
                         </div>
 
                         <div class="max-lg:max-w-lg max-lg:mx-auto mt-5">
-                            <button id="btn-make-order-wpp"
+                            <button id="btn-checkout"
                                 class="rounded-full py-4 px-6 bg-indigo-600 text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 ">Fazer Pedido</button>
                         </div>
+
+                        
+
+                    <!-- modal checkout -->
+                    <div id="modalCheckout" 
+                        tabindex="-1" 
+                        aria-hidden="true" 
+                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-60">
+                        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                            <!-- Modal content -->
+                            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                <!-- Modal header -->
+                                <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                        Detalhes do pedido
+                                    </h3>
+                                    <button id="btn-close-modal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="updateProductModal">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                        <span class="sr-only">Fechar</span>
+                                    </button>
+                                </div>
+                                <!-- Modal body -->
+                                <form action="#">
+                                    <div id="cardItems"
+                                        class="bg-gray-300/50 rounded-lg p-4"></div>
+
+                                        <br>
+                                    
+                                    <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                        <div class="flex-1">
+                                            <x-input-label for="client_zipcode" 
+                                                :value="__('CEP')"/>
+                                            <x-text-input id="client_zipcode" 
+                                                name="client_zipcode" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="CEP" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_street" 
+                                                :value="__('Rua')"/>
+                                            <x-text-input id="client_street" 
+                                                name="client_street" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Rua" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_number" 
+                                                :value="__('Número')"/>
+                                            <x-text-input id="client_number" 
+                                                name="client_number" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Número" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_district" 
+                                                :value="__('Bairro')"/>
+                                            <x-text-input id="client_district" 
+                                                name="client_district" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Bairro" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_complement" 
+                                                :value="__('Complemento')"/>
+                                            <x-text-input id="client_complement" 
+                                                name="client_complement" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Complemento" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_city" 
+                                                :value="__('Cidade')"/>
+                                            <x-text-input id="client_city" 
+                                                name="client_city" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Cidade" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_state" 
+                                                :value="__('Estado')"/>
+                                            <x-text-input id="client_state" 
+                                                name="client_state" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Estado" />
+                                        </div>
+
+                                        <div class="flex-1">
+                                            <x-input-label for="client_reference" 
+                                                :value="__('Ponto de Referência')"/>
+                                            <x-text-input id="client_reference" 
+                                                name="client_reference" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="Ponto de Referência" />
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="grid gap-4 mb-4 sm:grid-cols-1">
+                                        <x-input-label for="client_reference" 
+                                            :value="__('Forma de pagamento')"/>
+                                        <select name="payment-method" id="payment-method" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                            <option value="0">Selecione</option>
+                                            <option value="D">Dinheiro</option>
+                                            <option value="C">Cartão (Débito/Credito)</option>
+                                            <option value="P">Pix</option>
+                                        </select>
+                                    </div>
+
+                                    <br>
+
+                                    <div id="div-D" class="div-method-payment grid gap-4 mb-4 sm:grid-cols-1 hidden">
+                                        <div class="flex-1">
+                                            <x-input-label for="client_change" 
+                                                :value="__('Precisa de troco para quanto?')"/>
+                                            <x-text-input id="client_change" 
+                                                name="client_change" 
+                                                type="text" 
+                                                class="mt-1 block w-full"
+                                                placeholder="0" />
+                                        </div>
+                                    </div>
+
+                                    <div id="div-C" class="div-method-payment grid gap-4 mb-4 sm:grid-cols-3 hidden"></div>
+
+                                    <div id="div-P" class="div-method-payment grid gap-4 mb-4 sm:grid-cols-3 hidden"></div>
+
+                                    
+
+                                        <br>
+
+                                    <div class="flex items-center space-x-4">
+                                        <x-primary-button type="button"
+                                            id="btn-send-order">
+                                            {{ __('Fazer Pedido') }}
+                                        </x-primary-button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
         </section>
-        <script src="{{ asset('/js/menu/menu.js') }}"></script>
+        @vite(['resources/js/menu/menu.js'])
     </body>
+    
 </html>
