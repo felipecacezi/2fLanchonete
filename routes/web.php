@@ -33,6 +33,7 @@ Route::middleware([
         // category
         Route::get('/datatable/category', [DatatableController::class, 'category'])->name('datatable.category');
         Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/category/autocomplete/{word}', [CategoryController::class, 'autocomplete'])->name('category.autocomplete');
         Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
 

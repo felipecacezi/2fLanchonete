@@ -129,4 +129,19 @@ class CategoryController extends Controller
             throw new \Exception("Ocorreu um erro ao deletar a categoria", 500);
         }
     }
+
+    public function autocomplete($word)
+    {
+        $categories = Category::where('category_active', 'a')
+            ->where('category_name', 'like', '%'.$word.'%')
+            ->get();    
+            
+        if (isset($categories) && !empty($categories)) {
+            $categories = $categories->toArray();
+        } else {
+            $categories = [];
+        }        
+
+        return $categories;
+    }
 }

@@ -16,6 +16,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@tarekraafat/autocomplete.js": "^10.2.7",
+        "datatables.net-dt": "^2.1.2",
         "glob": "^10.4.2",
         "sweetalert2": "^11.12.0"
     }

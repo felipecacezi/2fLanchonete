@@ -72,8 +72,12 @@ class ProductController extends Controller
     public function edit($id)
     {        
         $fileController = new FileController();
-        $arProduct = Product::find($id);
-        $arProduct->toArray();
+        $arProduct = Product::select('products.*', 'categories.category_name', 'categories.id as category_id')
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
+            ->where('products.id', $id)
+            ->get()
+            ->toArray();
+        $arProduct = array_shift($arProduct);
         $arProduct['product_price'] = Currency::convertCentsToReal($arProduct['product_price']);
         return view(
             'product.edit',
@@ -89,6 +93,7 @@ class ProductController extends Controller
         try {
             $data = $request->all();
             $arProduct = Product::find($request->id);
+
 
             if (!$arProduct) {
                 throw new \Exception(
@@ -108,6 +113,7 @@ class ProductController extends Controller
                 201,                
             );
         } catch (\Throwable $th) {
+            dd($th);
             throw new \Exception("Ocorreu um erro ao editar o produto", 500);
         }
     }
