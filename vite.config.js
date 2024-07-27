@@ -8,9 +8,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                ...glob.sync('resources/js/category/*.js'),
-                'resources/vendor/datatables/datatables.min.js',
-                'resources/vendor/datatables/datatables.min.css',
+                ...glob.sync('resources/js/*/*.js'),
             ],
             refresh: true,
         }),

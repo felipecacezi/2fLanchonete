@@ -1,4 +1,6 @@
 ﻿<x-app-layout>
+@vite(['resources/css/product/all.css'])
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.02.min.css">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Editar Produto') }}
@@ -32,7 +34,7 @@
                 bg-gray-200
                 p-2
                 rounded-lg">
-<!-- < ?php dd($arProduct); ?> -->
+
                 <div class="flex gap-4">
 
                     <input type="hidden" name="product_id" id="product_id" value="{{ $arProduct['id'] }}">
@@ -49,6 +51,19 @@
                             autocomplete="current-password"
                             placeholder="Nome do produto"
                             value="{{ $arProduct['product_name'] }}"/>
+                    </div>
+
+                    <div class="flex-1">
+                        <x-input-label for="category_id" 
+                            :value="__('Categoria')"/>
+                        <x-text-input id="category_id" type="search"
+                            name="category_id" 
+                            type="text" 
+                            class="mt-1 block w-screen" 
+                            autocomplete="current-password"
+                            placeholder="Nome da categoria"
+                            value="{{ $arProduct['category_name'] }}"
+                            data-id="{{ $arProduct['category_id'] }}" />
                     </div>
 
                     <div class="w-80">
@@ -96,7 +111,7 @@
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                             </div>
-                            <img id="preview" src="" alt="" class="">
+                            <img id="preview" src="" alt="" class="w-70 h-70 object-cover overflow-hidden">
                             <input id="dropzone-file" type="file" class="hidden" />
                         </label>
                     </div> 

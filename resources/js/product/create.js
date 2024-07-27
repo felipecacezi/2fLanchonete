@@ -1,11 +1,13 @@
 ﻿import axios from "axios";
 import Swal from 'sweetalert2';
+import autoComplete from "@tarekraafat/autocomplete.js";
 
 const elmntTenant = document.getElementById('tenant_id');
 const elmntName = document.getElementById('product_name');
 const elmntActive = document.getElementById('product_active');
 const elmntPrice = document.getElementById('product_price');
 const elmntDescription = document.getElementById('product_description');
+const elmntCategoryId = document.getElementById('category_id');
 
 const elmntFile = document.getElementById('dropzone-file');
 const elmntDropzone = document.getElementById('dropzone-img');
@@ -16,7 +18,51 @@ const elmntRemoveImg = document.getElementById('btnRemoveImg');
 const elmntStore = document.getElementById('btnStore');
 const elmntCancel = document.getElementById('btnCancel');
 
-
+const autoCompleteJS = new autoComplete({
+    selector: "#category_id",
+    placeHolder: "Pesquise por uma categoria...",
+    data: {
+        src: async (query) => {
+            try {
+                const source = await fetch(`/category/autocomplete/${query}`);
+                const data = await source.json();
+                return data.map((category) => {
+                    return {
+                        category_name: category.category_name,
+                        category_id: category.id
+                    };
+                });
+            } catch (error) {
+              return error;
+            }
+          },
+        keys: ["category_name"],
+        cache: false,
+    },
+    resultsList: {
+        element: (list, data) => {
+            if (!data.results.length) {
+                const message = document.createElement("div");
+                message.setAttribute("class", "no_result");
+                message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                list.prepend(message);
+            }
+        },
+        noResults: true,
+    },
+    resultItem: {
+        highlight: true
+    },
+    events: {
+        input: {
+            selection: (event) => {
+                const selection = event.detail.selection.value;
+                autoCompleteJS.input.value = selection.category_name;
+                autoCompleteJS.input.setAttribute('data-id', selection.category_id);
+            }
+        }
+    }
+});
 const handleRemoveImg = ()=>{
     axios.delete(
         `/file/${elmntFile.getAttribute('data-id')}`, 
@@ -97,6 +143,7 @@ elmntStore.addEventListener('click', ()=>{
             'product_active': elmntActive.checked ? 'a' : 'i',
             'product_description': elmntDescription.value,
             'product_price': elmntPrice.value,
+            'category_id': elmntCategoryId.getAttribute('data-id'),
             'file_id': elmntFile.getAttribute('data-id')
         }, 
         {
