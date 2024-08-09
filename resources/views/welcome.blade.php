@@ -16,19 +16,98 @@
     <body class="">
         <section class="py-5 relative">
             <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-
                 <div class="flex flex-col justify-center items-center rounded-3xl mb-8">
                     <div class="img box mb-5 w-mx h-96 px-5 overflow-hidden flex">
                         <img src="https://logo.criativoon.com/wp-content/uploads/2016/07/logotipo-lanchonete.png" alt="speaker image" class="md:w-max lg:w-max rounded-3xl">
                     </div>
                     <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">
-                        Kilanche
+                        {{ $menuConfigs->menuconf_title }}
                     </h2>
                     <div>
                         <p>
-                            Descubra a deliciosa experiência da Lanchonete Kilanche, o lugar ideal para toda a família saborear um incrível hambúrguer! Com um ambiente acolhedor e descontraído, oferecemos uma variedade de opções suculentas que vão satisfazer todos os gostos. Nossos hambúrgueres são preparados com ingredientes frescos e de alta qualidade, garantindo sabor e qualidade em cada mordida. Venha nos visitar e desfrute de momentos deliciosos com quem você mais ama. Kilanche, onde cada hambúrguer é uma experiência única!
+                            {{ $menuConfigs->menuconf_description }}
                         </p>
+                    </div>              
+                    
+                    <div class="w-full mt-5">
+                        <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
+                            Horário de funcionamento
+                        </h2>
                     </div>
+                                             
+                    <div class="grid grid-cols-4 gap-5 mt-5 lg:w-full sm:mx-auto sm:mb-2 -mx-2">
+
+                        <div class="">
+                            <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                            
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-gray-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+                            <span class="title-font font-medium">Abertura - {{ $menuConfigs->menuconf_open }}</span>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                            
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-gray-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+                            <span class="title-font font-medium">Almoço - {{ $menuConfigs->menuconf_lunch }}</span>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                            
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-gray-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+                            <span class="title-font font-medium">Reabertura - {{ $menuConfigs->menuconf_reopen }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="">
+                            <div class="bg-gray-100 rounded flex p-4 h-full items-center">                                    
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-gray-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+                            <span class="title-font font-medium">Fechamento - {{ $menuConfigs->menuconf_close }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="w-full mt-5">
+                        <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
+                            Tempo médio de espera
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-5 mt-5 lg:w-full sm:mx-auto sm:mb-2 -mx-2">
+
+                        <div class="">
+                            <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                            
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-gray-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+                            <span class="title-font font-medium">{{ $menuConfigs->menuconf_wait_time }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
                 </div>
 
                 <div>

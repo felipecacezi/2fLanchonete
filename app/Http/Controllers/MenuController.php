@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Helpers\Currency;
 use App\Models\Category;
+use App\Models\MenuConfig;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,9 +37,11 @@ class MenuController extends Controller
             }
         }
 
+        $menuConfigs = MenuConfig::first();
+
         return view(
             'welcome', 
-            compact('productsFinal')
+            compact(['productsFinal', 'menuConfigs'])
         );
     }
 
@@ -69,17 +72,43 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        $configs = MenuConfig::first(); 
+        return view(
+            'menuConfig.edit', 
+            compact('configs')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        try {
+
+            $configs = MenuConfig::first();    
+            $msg = "";
+            if (!$configs) {
+                MenuConfig::create($request->all());
+                $msg = 'Categoria criada com sucesso.';
+            } else {
+                $configs->update($request->all());
+                $msg = 'Categoria editada com sucesso.';
+            }
+
+            return response(
+                [
+                    'msg' => $msg,
+                    'data' => [],
+                    'status' => 201
+                ],
+                201,                
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception("Ocorreu um erro ao gravar as configurações do cardápio.", 500);
+        }            
     }
 
     /**
