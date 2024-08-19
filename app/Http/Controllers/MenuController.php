@@ -37,10 +37,13 @@ class MenuController extends Controller
             }
         }
 
-        $menuConfigs = MenuConfig::first();
+        $menuConfigs = MenuConfig::leftJoin('files', 'menu_configs.file_id', '=', 'files.id')
+            ->first()
+            ->toArray();
+        $menuConfigs['menu_cover_url'] = Storage::url($menuConfigs['file_path']);
 
         return view(
-            'welcome', 
+            'menu', 
             compact(['productsFinal', 'menuConfigs'])
         );
     }
@@ -87,7 +90,6 @@ class MenuController extends Controller
     public function update(Request $request)
     {
         try {
-
             $configs = MenuConfig::first();    
             $msg = "";
             if (!$configs) {

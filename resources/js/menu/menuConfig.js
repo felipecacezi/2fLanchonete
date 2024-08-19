@@ -10,6 +10,14 @@ const elmntReopen = document.getElementById('menuconf_reopen');
 const elmntClose = document.getElementById('menuconf_close');
 const elmntWaitTime = document.getElementById('menuconf_wait_time');
 
+const elmntTenant = document.getElementById('tenant_id');
+const elmntFileId = document.getElementById('file_id');
+
+const elmntFile = document.getElementById('dropzone-file');
+const elmntDropzone = document.getElementById('dropzone-img');
+const elmntPreview = document.getElementById('preview');
+const elmntRemoveImg = document.getElementById('btnRemoveImg');
+
 
 elmntStore.addEventListener('click', ()=>{
     axios.put(
@@ -22,6 +30,7 @@ elmntStore.addEventListener('click', ()=>{
             'menuconf_reopen': elmntReopen.value,
             'menuconf_close': elmntClose.value,
             'menuconf_wait_time': elmntWaitTime.value,
+            'file_id': elmntFile.getAttribute('data-id')
         }, 
         {
             headers: {
@@ -51,4 +60,122 @@ elmntStore.addEventListener('click', ()=>{
     });j
 });
 
-document.addEventListener("DOMContentLoaded", function(event) {});
+const loadProductImage = ()=>{
+    if (!elmntFileId.value) {
+        elmntFile.setAttribute('data-id', '');
+        elmntFile.setAttribute('data-path', '');
+        elmntDropzone.classList.remove('hidden');
+        elmntPreview.classList.add('hidden');          
+        elmntRemoveImg.classList.add('hidden');   
+        elmntPreview.setAttribute('src', '');
+        return false;
+    }
+    axios.get(
+        `/file/${elmntFileId.value}`, 
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        }
+    ).then((response) => {
+        const data = response.data;
+        if (data) {
+            elmntPreview.setAttribute('src', data);
+        } else {
+            elmntFile.setAttribute('data-id', '');
+            elmntFile.setAttribute('data-path', '');
+            elmntDropzone.classList.remove('hidden');
+            elmntPreview.classList.add('hidden');          
+            elmntRemoveImg.classList.add('hidden');   
+            elmntPreview.setAttribute('src', '');
+        }
+    }).catch((error) => {
+        Swal.fire({
+            title: 'Erro',
+            text: error.response.data.message,
+            icon: 'error',
+            confirmButtonText: 'Fechar'
+        })
+    });
+}
+
+const handleRemoveImg = ()=>{
+    axios.delete(
+        `/file/${elmntFileId.value}`, 
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        }
+    ).then((response) => {
+        const data = response.data;
+        if (data) {
+            elmntFile.setAttribute('data-id', '');
+            elmntFile.setAttribute('data-path', '');
+            elmntDropzone.classList.remove('hidden');
+            elmntPreview.classList.add('hidden');          
+            elmntRemoveImg.classList.add('hidden');   
+            elmntPreview.setAttribute('src', '');
+        }
+    }).catch((error) => {
+        Swal.fire({
+            title: 'Erro',
+            text: error.response.data.message,
+            icon: 'error',
+            confirmButtonText: 'Fechar'
+        })
+    });
+}
+
+elmntFile.addEventListener('change', ()=>{
+    const file = elmntFile.files[0];
+    
+    if (file) {
+
+        const formData = new FormData();
+        const reader = new FileReader();
+        formData.append('file', file);
+        formData.append('tenantId', elmntTenant.value);
+
+        axios.post(
+            '/file', 
+            formData, 
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        )
+        .then(response => {
+            const data = response.data.data;
+            elmntFile.setAttribute('data-id', data.fileId);
+            elmntFile.setAttribute('data-path', data.filePath);
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Erro',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Fechar'
+            })
+        });
+
+        reader.onload = function (e) {
+            elmntDropzone.classList.add('hidden');
+            elmntPreview.setAttribute('src', e.target.result);  
+            elmntPreview.classList.remove('hidden');          
+            elmntRemoveImg.classList.remove('hidden');   
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadProductImage();
+
+    elmntRemoveImg.addEventListener('click', ()=>{
+        handleRemoveImg();
+    })
+});

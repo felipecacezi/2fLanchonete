@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Helpers\FileHelper;
+use App\Models\MenuConfig;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,6 +59,7 @@ class FileController extends Controller
         try {
             $arFile = FileHelper::findFile($id);
             FileHelper::deleteFile($arFile);
+            
             return response(
                 [
                     'msg' => 'Arquivo deletado com sucesso.',
@@ -67,6 +69,7 @@ class FileController extends Controller
                 200,                
             );
         } catch (\Throwable $th) {
+            dd($th);
             throw new \Exception(
                 "Ocorreu um erro ao inativar o arquivo", 
                 500

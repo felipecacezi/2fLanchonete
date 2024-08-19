@@ -16,5 +16,6 @@ class MenuConfig extends Model
         'menuconf_reopen',
         'menuconf_close',
         'menuconf_wait_time',
+        'file_id'
     ];
 }
