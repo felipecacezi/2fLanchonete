@@ -58,6 +58,11 @@ Route::middleware([
         Route::post('/file', [FileController::class, 'store'])->name('file.store');
         Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('file.destroy');
         //end files
+
+        // menu config
+        Route::get('/menuConfig', [MenuController::class, 'edit'])->name('menuConfig.edit');
+        Route::put('/menuConfig', [MenuController::class, 'update'])->name('menuConfig.update');
+        // end menu config
         
     });
 
