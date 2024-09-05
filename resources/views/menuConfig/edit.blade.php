@@ -7,7 +7,7 @@
     </x-slot>
 
     <input type="hidden" value="{{ tenancy()->tenant->id }}" name="tenant_id" id="tenant_id">
-    <input type="hidden" name="file_id" id="file_id" value="{{ $configs['file_id'] }}">
+    <input type="hidden" name="file_id" id="file_id" value="{{ $configs['file_id'] ?? '' }}">
 
         <div class="w-full">
             <!-- <form action=""> -->
@@ -43,7 +43,7 @@
                             class="mt-1 block w-full" 
                             autocomplete="current-password"
                             placeholder="Titulo" 
-                            value="{{ $configs->menuconf_title }}"/>
+                            value="{{ $configs->menuconf_title ?? '' }}"/>
                     </div>
 
                     <div class="">
@@ -56,7 +56,7 @@
                             autocomplete="current-password"
                             placeholder="Descrição"
                             rows="10">
-                            <x-slot:teste>{{ $configs->menuconf_description }}</x-slot>
+                            <x-slot:teste>{{ $configs->menuconf_description ?? '' }}</x-slot>
                         </x-text-area>
                     </div>
 
@@ -71,7 +71,7 @@
                                 class="mt-1 block w-full" 
                                 autocomplete="current-password"
                                 placeholder="Horário abertura" 
-                                value="{{ $configs->menuconf_open }}"/>
+                                value="{{ $configs->menuconf_open ?? '' }}"/>
                         </div>
 
                         <div class="">
@@ -83,7 +83,7 @@
                                 class="mt-1 block w-full" 
                                 autocomplete="current-password"
                                 placeholder="Fechamento almoço" 
-                                value="{{ $configs->menuconf_lunch }}"/>
+                                value="{{ $configs->menuconf_lunch ?? '' }}"/>
                         </div>
 
                         <div class="">
@@ -95,7 +95,7 @@
                                 class="mt-1 block w-full" 
                                 autocomplete="current-password"
                                 placeholder="Horário reabertura" 
-                                value="{{ $configs->menuconf_reopen }}"/>
+                                value="{{ $configs->menuconf_reopen ?? '' }}"/>
                         </div>
 
                         <div class="">
@@ -107,7 +107,7 @@
                                 class="mt-1 block w-full" 
                                 autocomplete="current-password"
                                 placeholder="Horário fechamento" 
-                                value="{{ $configs->menuconf_close }}"/>
+                                value="{{ $configs->menuconf_close ?? '' }}"/>
                         </div>
 
                         <div class="">
@@ -119,7 +119,7 @@
                                 class="mt-1 block w-full" 
                                 autocomplete="current-password"
                                 placeholder="Tempo de espera"
-                                value="{{ $configs->menuconf_wait_time }}"/>
+                                value="{{ $configs->menuconf_wait_time ?? '' }}"/>
                         </div>
 
                     </div>

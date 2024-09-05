@@ -14,18 +14,19 @@
 
     </head>
     <body class="">
+        @if($menuConfigs && $productsFinal)
         <section class="py-5 relative">
             <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
                 <div class="flex flex-col justify-center items-center rounded-3xl mb-8">
                     <div class="img box mb-5 w-mx h-96 px-5 overflow-hidden flex">                    
-                        <img src="{{ $menuConfigs['menu_cover_url'] }}" alt="speaker image" class="md:w-max lg:w-max rounded-3xl">
+                        <img src="{{ $menuConfigs['menu_cover_url'] ?? '' }}" alt="speaker image" class="md:w-max lg:w-max rounded-3xl">
                     </div>
                     <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">
-                        {{ $menuConfigs['menuconf_title'] }}
+                        {{ $menuConfigs['menuconf_title'] ?? '' }}
                     </h2>
                     <div>
                         <p>
-                            {{ $menuConfigs['menuconf_description'] }}
+                            {{ $menuConfigs['menuconf_description'] ?? '' }}
                         </p>
                     </div>              
                     
@@ -45,7 +46,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            <span class="title-font font-medium">Abertura - {{ $menuConfigs['menuconf_open'] }}</span>
+                            <span class="title-font font-medium">Abertura - {{ $menuConfigs['menuconf_open'] ?? '' }}</span>
                             </div>
                         </div>
 
@@ -57,7 +58,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            <span class="title-font font-medium">Almoço - {{ $menuConfigs['menuconf_lunch'] }}</span>
+                            <span class="title-font font-medium">Almoço - {{ $menuConfigs['menuconf_lunch'] ?? '' }}</span>
                             </div>
                         </div>
 
@@ -69,7 +70,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            <span class="title-font font-medium">Reabertura - {{ $menuConfigs['menuconf_reopen'] }}</span>
+                            <span class="title-font font-medium">Reabertura - {{ $menuConfigs['menuconf_reopen'] ?? '' }}</span>
                             </div>
                         </div>
                         
@@ -80,7 +81,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            <span class="title-font font-medium">Fechamento - {{ $menuConfigs['menuconf_close'] }}</span>
+                            <span class="title-font font-medium">Fechamento - {{ $menuConfigs['menuconf_close'] ?? '' }}</span>
                             </div>
                         </div>
 
@@ -102,7 +103,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            <span class="title-font font-medium">{{ $menuConfigs['menuconf_wait_time'] }}</span>
+                            <span class="title-font font-medium">{{ $menuConfigs['menuconf_wait_time'] ?? '' }}</span>
                             </div>
                         </div>
 
@@ -111,6 +112,7 @@
                 </div>
 
                 <div>
+                    @if($productsFinal)
                         @foreach($productsFinal as $key => $products) 
                         <h1 class="font-manrope font-bold text-3xl leading-10 mb-8 text-start text-black">{{ $key }} </h1>
                             @foreach($products as $product) 
@@ -145,6 +147,7 @@
                                 </div>
                             @endforeach
                         @endforeach
+                    @endif
 
                         <div class="max-lg:max-w-lg max-lg:mx-auto">
                             <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
@@ -313,6 +316,12 @@
 
                 </div>
         </section>
+        @else
+            <div class="flex flex-col justify-center items-center h-screen">
+                <img src="{{ asset('img/emConstrucao.svg') }}" alt="" class="w-2/2 md:w-1/2">                
+                <p class="mt-8 text-2xl font-bold text-gray-600 mt-3">Desculpe, este estabelecimento ainda não possui cardápio.</p>
+            </div>
+        @endif
         @vite(['resources/js/menu/menu.js'])
     </body>
     
