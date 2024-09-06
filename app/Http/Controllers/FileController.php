@@ -20,7 +20,7 @@ class FileController extends Controller
    {
         try {
             $fileStored = Storage::put(
-                "{$request->tenantId}", 
+                "public/img/{$request->tenantId}", 
                 $request->file('file')
             );
 
@@ -44,7 +44,7 @@ class FileController extends Controller
             );
 
         } catch (\Throwable $th) {
-            Storage::delete('files/'.$request->file('file')->getClientOriginalName());
+            Storage::delete('public/img/'.$request->file('file')->getClientOriginalName());
             throw new \Exception(
                 "Ocorreu um erro ao realizar o upload do arquivo", 
                 500
@@ -69,7 +69,6 @@ class FileController extends Controller
                 200,                
             );
         } catch (\Throwable $th) {
-            dd($th);
             throw new \Exception(
                 "Ocorreu um erro ao inativar o arquivo", 
                 500
