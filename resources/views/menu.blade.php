@@ -13,14 +13,20 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
-    <body class="">
+    <body>
         @if($menuConfigs && $productsFinal)
 
-        <section class="flex flex-col md:px-24 px-2 pt-2 w-screen">
-            <div class=" mb-5 overflow-hidden flex rounded-t-lg">                    
-                <img src="{{ $menuConfigs['menu_cover_url'] ?? '' }}" alt="speaker image"/>
+        <section class="flex flex-col w-full md:px-96">
+            <div class=" mb-5 overflow-hidden flex md:rounded-lg">                    
+                <img src="{{ $menuConfigs['menu_cover_url'] ?? '' }}" 
+                    alt="speaker image"
+                    class="object-fit-cover w-full h-full"/>
             </div>
-            
+        </section>
+
+        <div class="w-full px-2 md:px-96">
+
+        <section class="flex flex-col w-full">            
             <div class="text-justify">
                 <p>
                     {{ $menuConfigs['menuconf_description'] ?? '' }}
@@ -28,7 +34,7 @@
             </div>   
         </section>
 
-        <section class="flex flex-col md:px-24 px-2 pt-2 w-screen">
+        <section class="flex flex-col w-full">
             <div class="flex items-start w-full">
                 <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
                     Horário de funcionamento
@@ -68,7 +74,7 @@
             </div>
         </section>
 
-        <section class="flex flex-col md:px-24 px-2 pt-2 w-screen">
+        <section class="flex flex-col w-full">
             <div class="flex items-start w-full">
                 <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
                     Tempo médio de espera
@@ -92,7 +98,7 @@
             </div>
         </section>
 
-        <section class="flex flex-col md:px-24 px-2 pt-2 w-screen">
+        <section class="flex flex-col w-full">
             @if($productsFinal)
                 @foreach($productsFinal as $key => $products) 
                 <h1 class="font-manrope font-bold text-3xl leading-10 mb-8 text-start text-black">{{ $key }} </h1>
@@ -131,7 +137,7 @@
             @endif
         </section>
 
-        <section class="flex flex-col md:px-24 px-2 pt-2 w-screen">
+        <section class="flex flex-col w-full">
             <div class="flex items-start w-full">
                 <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
                     SubTotal: R$ <span id="subtotal">0,00</span>
@@ -156,9 +162,8 @@
                     items-center w-full md:inset-0 h-modal md:h-full 
                     bg-black bg-opacity-60 overflow-hidden md:overflow-y-hidden">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto overflow-y-auto md:overflow-y-hidden max-h-screen">
-                <!-- Modal content -->
                 <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-                    <!-- Modal header -->
+                    
                     <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             Detalhes do pedido
@@ -168,7 +173,7 @@
                             <span class="sr-only">Fechar</span>
                         </button>
                     </div>
-                    <!-- Modal body -->
+                    
                     <form action="#">
                         <div id="cardItems"
                             class="bg-gray-300/50 rounded-lg p-4"></div>
@@ -310,6 +315,7 @@
                 <p class="mt-8 text-2xl font-bold text-gray-600 mt-3">Desculpe, este estabelecimento ainda não possui cardápio.</p>
             </div>
         @endif
+        </div>
         @vite(['resources/js/menu/menu.js'])
     </body>
     
