@@ -104,12 +104,14 @@
                 <h1 class="font-manrope font-bold text-3xl leading-10 mb-8 text-start text-black">{{ $key }} </h1>
                     @foreach($products as $product) 
                         <div class="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">                        
-                            <div class="col-span-12 lg:col-span-2 img box flex items-start justify-center">
+                        
+                            <div class="col-span-3 lg:col-span-3 img box flex items-start justify-center h-full">
                                 <img src="{{$product['productImgUrl']}}"
                                     alt=""
-                                    class="max-lg:w-full lg:w-[180px] rounded-2xl">
+                                    class="object-cover w-full h-full aspect-square rounded-2xl">
                             </div>
-                            <div class="col-span-12 lg:col-span-10 detail w-full lg:pl-3">
+
+                            <div class="col-span-12 lg:col-span-9 detail w-full lg:pl-3">
                                 <div class="flex items-center justify-between w-full mb-6">
                                     <h5 id="product_name_{{$product['id']}}" class="font-manrope font-bold text-2xl leading-9 text-gray-900">{{$product['product_name']}}</h5>
                                 </div>
@@ -131,6 +133,7 @@
                                     <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">R$ <span id="product_price_{{$product['id']}}">{{$product['product_price']}}</span></h6>
                                 </div>
                             </div>
+
                         </div>
                     @endforeach
                 @endforeach
