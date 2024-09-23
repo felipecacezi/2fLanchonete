@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Helpers\Currency;
+use App\Http\Requests\Menu\UpdateMenuRequest;
 use App\Models\Category;
 use App\Models\MenuConfig;
 use Illuminate\Http\Request;
@@ -96,9 +97,10 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(UpdateMenuRequest $request)
     {
         try {
+            $request->validated();
             $configs = MenuConfig::first();    
             $msg = "";
             if (!$configs) {

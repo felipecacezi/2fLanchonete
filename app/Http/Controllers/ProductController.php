@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
 use App\Models\Product;
 use App\Helpers\Currency;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\FileController;
+use App\Http\Requests\Product\CreateProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
+
 
 class ProductController extends Controller
 {
@@ -32,9 +31,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         try {
+            $request->validated();
             $data = $request->all();
             $data['product_price'] = Currency::convertRealToCents($data['product_price']);
             $newProduct = Product::create($data)->id;
@@ -88,9 +88,10 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(UpdateProductRequest $request)
     {
         try {
+            $request->validated();
             $data = $request->all();
             $arProduct = Product::find($request->id);
 
@@ -113,7 +114,6 @@ class ProductController extends Controller
                 201,                
             );
         } catch (\Throwable $th) {
-            dd($th);
             throw new \Exception("Ocorreu um erro ao editar o produto", 500);
         }
     }
@@ -124,6 +124,12 @@ class ProductController extends Controller
     public function destroy(Request $request, $id)
     {
         try {
+            if (!$id) {
+                throw new \Exception(
+                    "Impossível inativar o produto, motivo: produto não encontrado", 
+                    404
+                );
+            }
             $arProduct = Product::find($id);
             if (!$arProduct) {
                 throw new \Exception(

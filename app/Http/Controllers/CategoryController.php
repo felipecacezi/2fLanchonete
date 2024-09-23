@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\Category\CreateCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -30,9 +32,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
         try {
+            $request->validated();
             $newCategory = Category::create($request->all())->id;
 
             return response(
@@ -77,9 +80,10 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(UpdateCategoryRequest $request)
     {
         try {
+            $request->validated();
             $arCategory = Category::find($request->id);
             if (!$arCategory) {
                 throw new \Exception(
@@ -107,6 +111,13 @@ class CategoryController extends Controller
     public function destroy(Category $category, $id)
     {
         try {
+            if (!$id) {
+                throw new \Exception(
+                    "Impossível deletar a categoria, motivo: categoria não encontrada", 
+                    404
+                );
+            }
+
             $arCategory = Category::find($id);
             if (!$arCategory) {
                 throw new \Exception(
@@ -114,9 +125,11 @@ class CategoryController extends Controller
                     404
                 );
             }
+
             $arCategory->update([
                 'category_active' => 'i'
             ]);
+            
             return response(
                 [
                     'msg' => 'Categoria deletada com sucesso.',
