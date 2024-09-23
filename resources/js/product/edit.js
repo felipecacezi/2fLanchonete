@@ -146,7 +146,7 @@ elmntStore.addEventListener('click', ()=>{
             'product_description': elmntDescription.value,
             'category_id': elmntCategoryId.getAttribute('data-id'),
             'product_active': elmntActive.checked ? 'a' : 'i',
-            'file_id': elmntFile.getAttribute('data-id')
+            'file_id': elmntFileId.value
         }, 
         {
             headers: {

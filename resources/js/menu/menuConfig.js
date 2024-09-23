@@ -30,7 +30,7 @@ elmntStore.addEventListener('click', ()=>{
             'menuconf_reopen': elmntReopen.value,
             'menuconf_close': elmntClose.value,
             'menuconf_wait_time': elmntWaitTime.value,
-            'file_id': elmntFile.getAttribute('data-id')
+            'file_id': elmntFileId.value
         }, 
         {
             headers: {
