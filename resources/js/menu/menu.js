@@ -82,8 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
       }
     }
-
-    console.log(cart.products)
     
     if (action == 'add') {
       findAndAddNewItem(productId, cartObj);
@@ -172,9 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getCartItems = () => {
     let msgWpp = '';
+    const elmntOrderObs = document.getElementById('order_obs');
+
     for (const key in cart.products) {
       msgWpp += `- ${cart.products[key].name} - R$: ${cart.products[key].price} - Qtd: ${cart.products[key].quantity}\n`;
     }
+    msgWpp += `\nObservações: ${elmntOrderObs.value}\n`;
     msgWpp += `\nValor total: R$ ${cart.subtotal}`;
 
     return msgWpp;

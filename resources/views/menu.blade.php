@@ -141,11 +141,28 @@
         </section>
 
         <section class="flex flex-col w-full">
+
+            <div class="flex flex-col items-start w-full">
+                <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
+                    Observação
+                </h2>
+                <x-text-area id="order_obs" 
+                    name="order_obs" 
+                    type="text" 
+                    class="mt-1 block w-full" 
+                    autocomplete="current-password"
+                    placeholder="Ex.: Sem maionese, sem queijo etc..."
+                    rows="10">
+                    <x-slot:teste>{{ $configs->menuconf_description ?? '' }}</x-slot>
+                </x-text-area>
+            </div>
+
             <div class="flex items-start w-full">
                 <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
                     SubTotal: R$ <span id="subtotal">0,00</span>
                 </h6>
             </div>
+
 
             <div class="mt-5 mb-5 ">
                 <button id="btn-checkout"
