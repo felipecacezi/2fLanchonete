@@ -55,12 +55,17 @@
                     <div class="flex-1">
                         <x-input-label for="category_id" 
                             :value="__('Categoria')"/>
-                        <x-text-input id="category_id" type="search"
+                        <x-select-input id="category_id" 
                             name="category_id" 
                             type="text" 
-                            class="mt-1 block w-screen" 
-                            autocomplete="current-password"
-                            placeholder="Nome da categoria" />
+                            class="mt-1 block w-full"
+                            placeholder="Descrição do produto">
+                            <x-slot:options>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category['id'] }}">{{ $category['category_name'] }}</option>
+                                @endforeach
+                            </x-slot>
+                        </x-select-input>
                     </div>
 
                     <div class="w-80">

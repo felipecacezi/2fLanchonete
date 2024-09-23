@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Helpers\Currency;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
@@ -25,7 +26,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+        return view(
+            'product.create', 
+            compact('categories')
+        );
     }
 
     /**
@@ -79,9 +84,10 @@ class ProductController extends Controller
             ->toArray();
         $arProduct = array_shift($arProduct);
         $arProduct['product_price'] = Currency::convertCentsToReal($arProduct['product_price']);
+        $categories = Category::all();
         return view(
             'product.edit',
-            compact('arProduct')
+            compact('arProduct', 'categories')
         );
     }
 
