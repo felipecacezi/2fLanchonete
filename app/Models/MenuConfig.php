@@ -16,6 +16,14 @@ class MenuConfig extends Model
         'menuconf_reopen',
         'menuconf_close',
         'menuconf_wait_time',
+        'menuconf_contactphone',
+        'menuconf_whatsappnumber',
+        'menuconf_zipcode',
+        'menuconf_street',
+        'menuconf_district',
+        'menuconf_city',
+        'menuconf_state',
+        'menuconf_number',
         'file_id'
     ];
 }
