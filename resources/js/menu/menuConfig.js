@@ -10,6 +10,16 @@ const elmntReopen = document.getElementById('menuconf_reopen');
 const elmntClose = document.getElementById('menuconf_close');
 const elmntWaitTime = document.getElementById('menuconf_wait_time');
 
+const elmntContactPhone = document.getElementById('menuconf_contactphone');
+const elmntWhatsappNumber = document.getElementById('menuconf_whatsappnumber');
+
+const elmntZipCode = document.getElementById('menuconf_zipcode');
+const elmntStreet = document.getElementById('menuconf_street');
+const elmntDistrict = document.getElementById('menuconf_district');
+const elmntCity = document.getElementById('menuconf_city');
+const elmntState = document.getElementById('menuconf_state');
+const elmntNumber = document.getElementById('menuconf_number');
+
 const elmntTenant = document.getElementById('tenant_id');
 const elmntFileId = document.getElementById('file_id');
 
@@ -30,6 +40,14 @@ elmntStore.addEventListener('click', ()=>{
             'menuconf_reopen': elmntReopen.value,
             'menuconf_close': elmntClose.value,
             'menuconf_wait_time': elmntWaitTime.value,
+            'menuconf_contactphone': elmntContactPhone.value,
+            'menuconf_whatsappnumber': elmntWhatsappNumber.value,
+            'menuconf_zipcode': elmntZipCode.value,
+            'menuconf_street': elmntStreet.value,
+            'menuconf_district': elmntDistrict.value,
+            'menuconf_city': elmntCity.value,
+            'menuconf_state': elmntState.value,
+            'menuconf_number': elmntNumber.value,
             'file_id': elmntFileId.value
         }, 
         {
