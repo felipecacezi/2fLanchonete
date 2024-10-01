@@ -1,6 +1,5 @@
 ﻿const phoneInputs = document.querySelectorAll('.phone_mask');
 const timeInputs = document.querySelectorAll('.time_mask');
-const hourInputs = document.querySelectorAll('.hour_mask');
 
 phoneInputs.forEach((input) => {
   input.addEventListener('input', () => {
@@ -28,20 +27,6 @@ timeInputs.forEach((input) => {
       input.value = formattedTime;
     } else if (input.value.length > timeMask.length) {
       input.value = input.value.slice(0, timeMask.length);
-    }
-  });
-});
-
-hourInputs.forEach((input) => {
-  input.addEventListener('input', () => {
-    input.value = input.value.replace(/[^0-9]/g, '');
-  });
-
-  input.addEventListener('blur', () => {
-    const hour = input.value;
-    if (hour !== '') {
-      const formattedHour = hour + ' Hrs';
-      input.value = formattedHour;
     }
   });
 });

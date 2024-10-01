@@ -302,6 +302,7 @@
                                 class="mt-1 block w-full hour_mask" 
                                 autocomplete="current-password"
                                 placeholder="Tempo de espera"
+                                maxlength="5"
                                 value="{{ $configs->menuconf_wait_time ?? '' }}"/>
                         </div>
                     </div>
