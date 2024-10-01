@@ -9,14 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('menu_configs', function (Blueprint $table) {
-            $table->string('menuconf_contactphone');
-            $table->string('menuconf_whatsappnumber');
-            $table->string('menuconf_zipcode');
-            $table->string('menuconf_street');
-            $table->string('menuconf_district');
-            $table->string('menuconf_city');
-            $table->string('menuconf_state');
-            $table->string('menuconf_number');
+            $table->string('menuconf_contactphone')->default('');
+            $table->string('menuconf_whatsappnumber')->default('');
+            $table->string('menuconf_zipcode')->default('');
+            $table->string('menuconf_street')->default('');
+            $table->string('menuconf_district')->default('');
+            $table->string('menuconf_city')->default('');
+            $table->string('menuconf_state')->default('');
+            $table->string('menuconf_number')->default('');
         });
     }
 
