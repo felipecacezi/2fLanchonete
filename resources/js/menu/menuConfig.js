@@ -75,7 +75,7 @@ elmntStore.addEventListener('click', ()=>{
             icon: 'error',
             confirmButtonText: 'Fechar'
         })
-    });j
+    });
 });
 
 const loadProductImage = ()=>{
@@ -167,7 +167,8 @@ elmntFile.addEventListener('change', ()=>{
             }
         )
         .then(response => {
-            const data = response.data.data;
+            const data = response.data.data;            
+            elmntFileId.value = data.fileId;
             elmntFile.setAttribute('data-id', data.fileId);
             elmntFile.setAttribute('data-path', data.filePath);
         })
