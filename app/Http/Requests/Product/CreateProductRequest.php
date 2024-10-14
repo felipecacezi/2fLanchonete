@@ -24,7 +24,7 @@ class CreateProductRequest extends FormRequest
         return [
             'product_name' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:categories,id',
-            'product_price' => 'required|numeric',
+            'product_price' => 'required',
             'file_id' => 'required|integer|exists:files,id',
         ];
     }
@@ -42,7 +42,6 @@ class CreateProductRequest extends FormRequest
             'category_id.required' => 'A categoria do produto é obrigatória.',
             'category_id.exists' => 'Categoria inexistente, verifique se a categoria informada foi cadastrada e tente novamente.',
             'product_price.required' => 'O preço do produto é obrigatório.',
-            'product_price.numeric' => 'O preço do produto deve ser um número.',
             'file_id.required' => 'A imagem do produto é obrigatória.',
             'file_id.exists' => 'Imagem inválida.',
         ];
