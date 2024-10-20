@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('order_products', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_id');
+            $table->integer('order_product_quantity');
+            $table->integer('order_product_value');
+            $table->string('order_product_active', 1);
             $table->timestamps();
         });
     }
