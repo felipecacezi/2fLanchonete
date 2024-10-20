@@ -18,16 +18,27 @@ class MenuController extends Controller
     public function index()
     {
         try {
-            $products = Product::leftJoin('files', 'products.file_id', '=', 'files.id')
+            $products = Product::select(
+                    'products.id',
+                    'products.product_name',
+                    'products.product_description',
+                    'products.product_price',
+                    'products.product_active',
+                    'products.file_id',
+                    'products.category_id',
+                    'file_name',
+                    'file_path',
+                    'file_tenant',
+                    'file_active'
+                )
+                ->leftJoin('files', 'products.file_id', '=', 'files.id')
                 ->orderBy('products.category_id')
                 ->get()
-                ->toArray();
+                ->toArray();               
 
             $categories = Category::where('category_active', 'a')
                 ->get()
                 ->toArray();
-
-            
             
             foreach ($products as $keyProd => &$product) {
                 $product['productImgUrl'] = Storage::url($product['file_path']);

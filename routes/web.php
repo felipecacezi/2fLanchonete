@@ -9,6 +9,7 @@ use App\Http\Controllers\DatatableController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 
 Route::middleware([
     'web',
@@ -63,8 +64,13 @@ Route::middleware([
         Route::get('/menuConfig', [MenuController::class, 'edit'])->name('menuConfig.edit');
         Route::put('/menuConfig', [MenuController::class, 'update'])->name('menuConfig.update');
         // end menu config
+
         
     });
+    // order
+    Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/order/status/{hash?}', [OrderController::class, 'show'])->name('order.show');
+    // end order
 
 });
 

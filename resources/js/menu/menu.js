@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       price: elmntProductPrice.innerText,
       quantity: elmntProductQuantity.value
     }
-
+    
     if (cart.products.length == 0) {      
       cart.products.push(cartObj);
       cart.subtotal = elmntProductSubtotal.innerText;
@@ -153,19 +153,21 @@ document.addEventListener('DOMContentLoaded', () => {
     modalCheckout.classList.add('flex');
   }
 
-  const makeOrderWhatsapp = ()=>{
+  const makeOrderWhatsapp = async ()=>{
 
-    let msgWpp = `Olá, gostaria de pedir os seguintes itens:\n\n`;
-    let cartItems = getCartItems();
-    let orderDetails = getOrderDetails();
+    await storeOrder();
 
-    if (!orderDetails) {
-      return;
-    }
+    // let msgWpp = `Olá, gostaria de pedir os seguintes itens:\n\n`;
+    // let cartItems = getCartItems();
+    // let orderDetails = getOrderDetails();
 
-    msgWpp += cartItems + orderDetails;
+    // if (!orderDetails) {
+    //   return;
+    // }
 
-    window.open(`https://api.whatsapp.com/send?phone=${encodeURIComponent('19992440916')}&text=${encodeURIComponent(msgWpp)}`);
+    // msgWpp += cartItems + orderDetails;
+
+    // window.open(`https://api.whatsapp.com/send?phone=${encodeURIComponent('19992440916')}&text=${encodeURIComponent(msgWpp)}`);
   }
 
   const getCartItems = () => {
@@ -179,6 +181,80 @@ document.addEventListener('DOMContentLoaded', () => {
     msgWpp += `\nValor total: R$ ${cart.subtotal}`;
 
     return msgWpp;
+  }
+
+  const storeOrder = () => {
+
+    const elmntRegister = document.getElementById('client_register');
+    const elmntName = document.getElementById('client_name');
+    const elmntZipCode = document.getElementById('client_zipcode');
+    const elmntStreet = document.getElementById('client_street');
+    const elmntNumber = document.getElementById('client_number');
+    const elmntComplement = document.getElementById('client_complement');
+    const elmntDistrict = document.getElementById('client_district');
+    const elmntCity = document.getElementById('client_city');
+    const elmntState = document.getElementById('client_state');
+    const elmntChange = document.getElementById('client_change');  
+    const elmntPayment = document.getElementById('payment-method');  
+    const elmntReference = document.getElementById('client_reference');
+    const elmntWhatsapp = document.getElementById('client_whatsapp');
+    const elmntPhone = document.getElementById('client_phone');
+    const elmntObs = document.getElementById('order_obs');
+
+    axios.post(
+        '/order', 
+        {
+          'order': {
+            'order_client_register': elmntRegister.value,
+            'order_client_name': elmntName.value,
+            'order_value_total': '',
+            'order_value_subtotal': '',
+            'order_value_taxes': '',
+            'order_payment_method': elmntPayment.value,
+            'order_zipcode': elmntZipCode.value,
+            'order_street': elmntStreet.value,
+            'order_number': elmntNumber.value,
+            'order_district': elmntDistrict.value,
+            'order_complement': elmntComplement.value,
+            'order_address_reference': elmntReference.value,
+            'order_city': elmntCity.value,
+            'order_state': elmntState.value,
+            'order_phone': elmntPhone.value,
+            'order_whatsapp': elmntWhatsapp.value,
+            'order_obs': elmntObs.value,
+            'order_change_value': elmntChange.value
+          },
+          'products': cart.products
+        }, 
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+    )
+    .then(response => {      
+      closeCheckoutModal();
+
+      Swal.fire({
+          title: 'Sucesso',
+          text: `${response.data.msg}`,
+          icon: 'success',
+          confirmButtonText: 'Fechar',
+          confirmButtonColor: "#1f2937",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.open(`${response.data.data.link}`, '_blank');
+        } 
+      }); 
+    })
+    .catch(error => {
+        Swal.fire({
+            title: 'Erro',
+            text: error.response?.data.message,
+            icon: 'error',
+            confirmButtonText: 'Fechar'
+        })
+    });
   }
 
   const getOrderDetails = () => {
@@ -284,7 +360,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const elmntChange = document.getElementById('client_change');  
     const elmntPayment = document.getElementById('payment-method');  
     const elmntReference = document.getElementById('client_reference');
-
+    const elmntQuantityInputs = document.querySelectorAll('.products-quantity');
+    const elmntObservation = document.getElementById('order_obs');
+    const elmntSubtotal = document.getElementById('subtotal');
+    
     elmntZipCode.value = '';
     elmntAddress.value = '';
     elmntNumber.value = '';
@@ -295,11 +374,22 @@ document.addEventListener('DOMContentLoaded', () => {
     elmntChange.value = '';
     elmntPayment.value = '0';
     elmntReference.value = '';
+    elmntObservation.value = '';
+    elmntSubtotal.innerHTML = '0,00';
+    cart = {
+      products: [],
+      subtotal: 0,
+      details: []
+    }
 
     const divs = document.getElementsByClassName('div-method-payment');
     for (var i = 0; i < divs.length; i++) {
       divs[i].classList.add('hidden');
     }
+
+    elmntQuantityInputs.forEach(input => {
+      input.value = 0;
+    });
 
     document.getElementById('cardItems').innerText = '';
 
