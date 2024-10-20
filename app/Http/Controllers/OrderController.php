@@ -68,7 +68,7 @@ class OrderController extends Controller
                 [
                     'msg' => 'Pedido feito com sucesso',
                     'data' => [
-                        'link' => 'http://foo.localhost/order/status/'.$arOrder["order"]["order_hash"]
+                        'link' => '/order/status/'.$arOrder["order"]["order_hash"]
                     ],
                     'status' => 201
                 ],
