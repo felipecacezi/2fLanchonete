@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Order extends Model
 {
     use HasFactory;
-    public $timestamps = true;
-    
+    public $timestamps = true;   
 
     protected $fillable = [
         'order_status',
