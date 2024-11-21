@@ -11,6 +11,7 @@ use App\Helpers\OrderStatusColor;
 use App\Repository\OrderRepository;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Requests\Orders\ChangeStatusRequest;
 
 class OrderController extends Controller
 {
@@ -75,6 +76,7 @@ class OrderController extends Controller
                 201,                
             );
         } catch (\Throwable $th) {
+            dd($th);
             throw new \Exception(
                 "Ocorreu um erro ao fazer o pedido.",
                 500
@@ -131,5 +133,29 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function changeStatus(ChangeStatusRequest $request, Order $order)
+    {
+        try {
+            $request->validated();
+            $order->where('id', $request->id)->update([
+                'order_status' => $request->order_status
+            ]);
+
+            return response(
+                [
+                    'msg' => 'Pedido aceito com sucesso.',
+                    'data' => [],
+                    'status' => 200
+                ],
+                200,                
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception(
+                "Ocorreu um erro ao aceitar o pedido.",
+                500
+            );
+        }
     }
 }

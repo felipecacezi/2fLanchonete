@@ -71,7 +71,9 @@ Route::middleware([
         Route::put('/menuConfig', [MenuController::class, 'update'])->name('menuConfig.update');
         // end menu config
 
-        
+        // order
+        Route::put('/order/accept', [OrderController::class, 'changeStatus'])->name('order.changestatus');
+        // end order
     });
     // order
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
