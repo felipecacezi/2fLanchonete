@@ -100,4 +100,53 @@ class OrderRepository
             
         return $orders->get();
     }
+
+    public static function getFullOrder(int $orderId)
+    {
+        return (new Order())::with('orderProducts.products')
+            ->where('id', $orderId)
+            ->first();
+    }
+
+    public static function getDashboardOrders(
+        string $dateInit, 
+        string $dateEnd
+    ) {
+        return (new Order())
+            ->whereIn('order_status', ['P', 'A', 'I', 'F', 'D'])
+            ->whereBetween('created_at', [$dateInit, $dateEnd])
+            ->get();
+    }
+
+    public static function getCancelledOrders()
+    {
+        return (new Order())
+            ->where('order_status', 'C')
+            ->get();
+    }
+
+    public static function getDeliveredOrders()
+    {
+        return (new Order())
+            ->where('order_status', 'E')
+            ->get();
+    }
+
+    public static function getBillingsToday(): string
+    {
+        return (new Order())
+            ->where('created_at', '>=', Carbon::today()->startOfDay())
+            ->where('created_at', '<=', Carbon::today()->endOfDay())
+            ->where('order_status', 'E')
+            ->sum('order_value_total');
+    }
+
+    public static function getBillingsMonth(): string
+    {
+        return (new Order())
+            ->where('created_at', '>=', Carbon::now()->startOfMonth())
+            ->where('created_at', '<=', Carbon::now()->endOfMonth())
+            ->where('order_status', 'E')
+            ->sum('order_value_total');
+    }
 }

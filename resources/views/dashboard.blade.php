@@ -7,83 +7,23 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
-    <form action="">
-      @csrf
-      <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex flex-col md:flex-row justify-center items-start h-1/2">
-                  <div class="bg-white p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/5 lg:w-2/5 xl:w-2/5 max-h-screen h-full overflow-y-auto scrollbar-hide flex flex-col">
-                      @foreach($arDailyOrders as $dailyOrder)
-                        <x-dashboard-ordercard 
-                          clientName="{{ $dailyOrder['order_client_name'] }}" 
-                          orderId="{{ $dailyOrder['id'] }}" 
-                          street="{{ $dailyOrder['order_street'] }}" 
-                          number="{{ $dailyOrder['order_number'] }}" 
-                          district="{{ $dailyOrder['order_district'] }}" 
-                          city="{{ $dailyOrder['order_city'] }}" 
-                          zipCode="{{ $dailyOrder['order_zipcode'] }}" 
-                          orderTime="{{ Carbon::parse($dailyOrder['created_at'])->format('H:i') }}"
-                          orderStatus="{{ $dailyOrder['order_status'] }}"/>                          
-                      @endforeach
-                  </div>
-
-                  <div class="bg-white p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/5 lg:w-2/5 xl:w-2/5">
-
-                      <div class="bg-gray-100 rounded-lg shadow-md p-2 m-2 flex flex-col justify-start items-start">
-                          <h2 class="text-lg font-bold">Pedido #001</h2>   
-                          <h2 class="text-lg mb-3"><b>Cliente:</b> José Bonifacio dos Santos</h2>
-                          <h2 class="text-lg"><b>Itens:</b></h2>
-                          <h2 class="text-lg ml-3"><b>3x - </b>X-Bacon - R$ 70,00</h2>
-                          <h2 class="text-lg ml-3"><b>1x - </b>X-Salada - R$ 15,50</h2>
-                          <h2 class="text-lg ml-3"><b>3x - </b>Coca lata - R$ 10,00</h2>
-                          <h2 class="text-lg ml-3 font-bold mb-3">Total: R$ 95,50</h2>
-
-                          <h2 class="text-lg font-bold">Endereço:</h2>
-                          <h2 class="text-lg ml-3">Rua José Manoel do Nascimento, 35</h2>
-                          <h2 class="text-lg ml-3">Bairro Antônio Zanaga</h2>
-                          <h2 class="text-lg ml-3">Americana-SP | 12345-678</h2>
-                          <h2 class="text-lg ml-3 mb-3">Horario do pedido: 22:30</h2>
-
-                          <h2 class="text-lg font-bold">Pagamento:</h2>
-                          <h2 class="text-lg ml-3 mb-3">Dinheiro, troco para <b>R$ 100,00</b></h2>
-
-                          <x-primary-button type="button" id="btnNewProduct" class="w-full h-12 text-center">
-                              {{ __('Despachar') }}
-                          </x-primary-button>
-                      </div>
-
-                  </div>
-
-                  <div class="bg-white p-2 text-gray-900 dark:text-gray-100 w-full md:w-1/5 lg:w-1/5 xl:w-1/5">
-                      
-                      <div class="bg-green-100 rounded-lg shadow-md p-2 m-2 flex flex-col justify-start items-start">
-                          <h2 class="text-lg font-bold">Faturamentos</h2>   
-                          <h2 class="text-lg">De hoje:</h2>
-                          <p class="text-gray-900 font-bold"><b>R$</b> 123,00</p>
-                          <h2 class="text-lg">Do mês:</h2>                        
-                          <p class="text-gray-900 font-bold"><b>R$</b> 123,00</p>
-                      </div>
-
-                      <div class="bg-yellow-100 rounded-lg shadow-md p-2 m-2 flex flex-col justify-start items-start">
-                          <h2 class="text-lg font-bold">Top 3 vendas</h2>
-                          <h2 class="text-lg">X-Bacon: <b>40</b></h2>
-                          <h2 class="text-lg">X-Frango: <b>10</b></h2>
-                          <h2 class="text-lg">X-Salada: <b>5</b></h2>
-                      </div>
-
-                      <div class="bg-red-100 rounded-lg shadow-md p-2 m-2 flex flex-col justify-start items-start">
-                          <h2 class="text-lg">Cancelados:</h2>
-                          <p class="text-gray-900 font-bold">Itens: 15</p>                        
-                          <p class="text-gray-900 font-bold"><b>R$</b> 250,00</p>
-                      </div>
-
-                  </div>
-                </div>
-              </div>
+    <div class="py-12">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">  
+        <div class="py-12">
+          <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 md:grid-cols-7">          
+              <!-- Primeira coluna: Pedidos -->
+              <livewire:order-list />
+              <!-- Segunda coluna: Detalhes do Pedido -->
+              <livewire:order-details />
+              <!-- Terceira coluna: Status do restaurante -->
+              <livewire:establishment-status />
             </div>
-    </form>
-    @vite(['resources/js/dashboard/cards.js'])
+          </div>
+        </div>
+      </div>
+    </div>
+    {{-- @vite(['resources/js/dashboard/cards.js']) --}}
 </x-app-layout>
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PaymentMethodEnum;
 use App\Enums\OrderStatusEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -38,11 +39,21 @@ class Order extends Model
         'product_active',
     ];
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
     protected function casts(): array
     {
         return [
             'order_payment_method' => PaymentMethodEnum::class,
-            'order_status' => OrderStatusEnum::class
+            'order_status' => OrderStatusEnum::class,
         ];
     }
 

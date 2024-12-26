@@ -21,4 +21,9 @@ class Product extends Model
     {
         return $this->belongsTo(File::class);
     }
+
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }
