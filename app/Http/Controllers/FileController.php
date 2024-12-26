@@ -20,7 +20,7 @@ class FileController extends Controller
    {
         try {
             $fileStored = Storage::put(
-                "public/img/{$request->tenantId}", 
+                "/img/{$request->tenantId}", 
                 $request->file('file')
             );
 

@@ -6,7 +6,7 @@ enum PaymentMethodEnum: string
 {
     case CARD = 'C';    
     case PIX = 'P';
-    case MONEY = 'M';
+    case MONEY = 'D';
 
     public static function toArray(): array
     {
