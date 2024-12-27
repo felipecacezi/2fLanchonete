@@ -282,7 +282,7 @@
 
     window.addEventListener('alert', (event) => {
         const eventDetail = event.__livewire;
-        const { title, text, icon, confirmButtonText, trigger } = eventDetail.params[0];
+        const { title, text, icon, confirmButtonText, trigger, orderId } = eventDetail.params[0];
       
         if (eventDetail.name === 'alert') {
             Swal.fire({
@@ -291,6 +291,15 @@
                 icon, 
                 confirmButtonText
             });
+        }
+
+        if (trigger === 'refreshStatus') {
+            window.dispatchEvent(new CustomEvent('refreshOrderDetails', {
+                detail: {
+                    componentId: eventDetail.id,
+                    orderId: orderId
+                }
+            }));
         }
     })
 </script>
