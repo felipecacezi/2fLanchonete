@@ -62,7 +62,7 @@ class OrderList extends Component
             'btnDispatch' => ['visibility' => true],
             'btnDetails' => ['visibility' => true],
             'btnPrint' => ['visibility' => true],
-            'btnFinish' => ['visibility' => false],
+            'btnFinish' => ['visibility' => true],
             'btnDelivery' => ['visibility' => false],
             'btnDelivered' => ['visibility' => false]
         ],
@@ -132,9 +132,10 @@ class OrderList extends Component
             [
                 'title' => 'Pedido Aceito!',
                 'text' => "O pedido #{$id} foi aceito com sucesso!",
+                'orderId' => $id,
                 'icon' => 'success',
                 'confirmButtonText' => 'OK',
-                'callback' => 'refreshStatus'
+                'trigger' => 'refreshStatus'
             ]
         );
     }
@@ -148,8 +149,10 @@ class OrderList extends Component
             [
                 'title' => 'Pedido Rejeitado!',
                 'text' => "O pedido #{$id} foi rejeitado com sucesso!",
+                'orderId' => $id,
                 'icon' => 'success',
-                'confirmButtonText' => 'OK'
+                'confirmButtonText' => 'OK',
+                'trigger' => 'refreshStatus'
             ]
         );
     }
@@ -163,11 +166,10 @@ class OrderList extends Component
             [
                 'title' => 'Pedido Cancelado!',
                 'text' => "O pedido #{$id} foi cancelado com sucesso!",
+                'orderId' => $id,
                 'icon' => 'success',
                 'confirmButtonText' => 'OK',
-                'trigger' => [
-                    'triggerName' => 'refreshStatus'
-                ]
+                'trigger' => 'refreshStatus'
             ]
         );
     }
@@ -181,11 +183,10 @@ class OrderList extends Component
             [
                 'title' => 'Pedido Finalizado!',
                 'text' => "O pedido #{$id} foi finalizado com sucesso!",
+                'orderId' => $id,
                 'icon' => 'success',
                 'confirmButtonText' => 'OK',
-                'trigger' => [
-                    'triggerName' => 'refreshStatus'
-                ]
+                'trigger' => 'refreshStatus'
             ]
         );
     }
@@ -199,11 +200,10 @@ class OrderList extends Component
             [
                 'title' => 'Pedido Liberado!',
                 'text' => "O pedido #{$id} foi liberado para o motoboy com sucesso!",
+                'orderId' => $id,
                 'icon' => 'success',
                 'confirmButtonText' => 'OK',
-                'trigger' => [
-                    'triggerName' => 'refreshStatus'
-                ]
+                'trigger' => 'refreshStatus'
             ]
         );
     }
@@ -217,11 +217,10 @@ class OrderList extends Component
             [
                 'title' => 'Pedido Entregue!',
                 'text' => "O pedido #{$id} entregue com sucesso!",
+                'orderId' => $id,
                 'icon' => 'success',
                 'confirmButtonText' => 'OK',
-                'trigger' => [
-                    'triggerName' => 'refreshStatus'
-                ]
+                'trigger' => 'refreshStatus'
             ]
         );
     }
