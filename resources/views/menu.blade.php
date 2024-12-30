@@ -105,16 +105,18 @@
                     @foreach($products as $product) 
                         <div class="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">                        
                         
-                            <div class="col-span-3 lg:col-span-3 img box flex items-start justify-center h-full">
-                                <img src="{{$product['productImgUrl']}}"
-                                    alt=""
-                                    class="object-cover w-full h-full aspect-square rounded-2xl">
+                            <div class="col-span-12 grid grid-cols-12 gap-4">
+                                <div class="col-span-3 md:col-span-2">
+                                    <img src="{{$product['productImgUrl']}}"
+                                        alt=""
+                                        class="object-cover w-full h-full aspect-square rounded-2xl md:h-40 md:w-40">
+                                </div>
+                                <div class="col-span-8 flex flex-col justify-center">
+                                    <h5 id="product_name_{{$product['id']}}" data-id="{{$product['id']}}" class="font-manrope font-bold text-2xl leading-9 text-gray-900">{{$product['product_name']}}</h5>
+                                </div>
                             </div>
 
                             <div class="col-span-12 lg:col-span-9 detail w-full lg:pl-3">
-                                <div class="flex items-center justify-between w-full mb-6">
-                                    <h5 id="product_name_{{$product['id']}}" data-id="{{$product['id']}}" class="font-manrope font-bold text-2xl leading-9 text-gray-900">{{$product['product_name']}}</h5>
-                                </div>
                                 <p class="font-normal text-base leading-7 text-gray-500 mb-6">{{$product['product_description']}}</p>
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center gap-4 mt-4">

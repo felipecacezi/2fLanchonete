@@ -266,7 +266,25 @@
                         ${tableRows}
                         <tr>
                             <th>===========================================</th>
-                        </tr>               
+                        </tr> 
+                        <tr>                        
+                            <th colspan="2">Endereço</th>
+                        </tr>
+                        <tr>
+                            <th>===========================================</th>
+                        </tr>      
+                         <tr colspan="2">
+                            <td><strong>Endereço:</strong>&nbsp;${data.order_street}, N° ${data.order_number}</td>
+                        </tr>
+                        <tr colspan="2">
+                            <td><strong>Cidade:</strong> ${data.order_district} - ${data.order_city} - ${data.order_state}</td>
+                        </tr>   
+                        <tr colspan="2">
+                            <td><strong>CEP:</strong> ${data.order_zipcode}</td>
+                        </tr>   
+                        <tr>
+                            <th>===========================================</th>
+                        </tr>            
                     </tbody>
                     <tfoot>
                         <tr>
