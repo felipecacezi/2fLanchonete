@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\Category;
 use App\Helpers\Currency;
-use Illuminate\Http\Request;
-use App\Http\Controllers\FileController;
 use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
-
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -27,8 +25,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return view(
-            'product.create', 
+            'product.create',
             compact('categories')
         );
     }
@@ -48,18 +47,15 @@ class ProductController extends Controller
                 [
                     'msg' => 'Produto criado com sucesso.',
                     'data' => [
-                        'product_id' => $newProduct
+                        'product_id' => $newProduct,
                     ],
-                    'status' => 201
+                    'status' => 201,
                 ],
                 201,
             );
-
         } catch (\Throwable $th) {
-            throw new \Exception(
-                "Ocorreu um erro ao gravar o produto",
-                500
-            );
+            dd($th);
+            throw new \Exception('Ocorreu um erro ao gravar o produto', 500);
         }
     }
 
@@ -68,14 +64,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {        
+    {
         $fileController = new FileController();
         $arProduct = Product::select('products.*', 'categories.category_name', 'categories.id as category_id')
             ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
@@ -85,6 +80,7 @@ class ProductController extends Controller
         $arProduct = array_shift($arProduct);
         $arProduct['product_price'] = Currency::convertCentsToReal($arProduct['product_price']);
         $categories = Category::all();
+
         return view(
             'product.edit',
             compact('arProduct', 'categories')
@@ -101,26 +97,23 @@ class ProductController extends Controller
             $data = $request->all();
             $arProduct = Product::find($request->id);
 
-
             if (!$arProduct) {
-                throw new \Exception(
-                    "Impossível editar o produto, motivo: produto não encontrado", 
-                    404
-                );
+                throw new \Exception('Impossível editar o produto, motivo: produto não encontrado', 404);
             }
             $data['product_price'] = Currency::convertRealToCents($data['product_price']);
             unset($request->id);
             $arProduct->update($data);
+
             return response(
                 [
                     'msg' => 'Produto editado com sucesso.',
                     'data' => [],
-                    'status' => 201
+                    'status' => 201,
                 ],
-                201,                
+                201,
             );
         } catch (\Throwable $th) {
-            throw new \Exception("Ocorreu um erro ao editar o produto", 500);
+            throw new \Exception('Ocorreu um erro ao editar o produto', 500);
         }
     }
 
@@ -131,31 +124,26 @@ class ProductController extends Controller
     {
         try {
             if (!$id) {
-                throw new \Exception(
-                    "Impossível inativar o produto, motivo: produto não encontrado", 
-                    404
-                );
+                throw new \Exception('Impossível inativar o produto, motivo: produto não encontrado', 404);
             }
             $arProduct = Product::find($id);
             if (!$arProduct) {
-                throw new \Exception(
-                    "Impossível inativar o produto, motivo: produto não encontrado", 
-                    404
-                );
+                throw new \Exception('Impossível inativar o produto, motivo: produto não encontrado', 404);
             }
             $arProduct->update([
-                'product_active' => 'i'
+                'product_active' => 'i',
             ]);
+
             return response(
                 [
                     'msg' => 'Produto inativado com sucesso.',
                     'data' => [],
-                    'status' => 201
+                    'status' => 201,
                 ],
-                201,                
+                201,
             );
         } catch (\Throwable $th) {
-            throw new \Exception("Ocorreu um erro ao inativar o produto", 500);
+            throw new \Exception('Ocorreu um erro ao inativar o produto', 500);
         }
     }
 }
