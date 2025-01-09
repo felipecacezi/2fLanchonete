@@ -23,6 +23,7 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'product_name' => 'required|string|max:255',
+            'product_description' => 'max:500',
             'category_id' => 'required|integer|exists:categories,id',
             'product_price' => 'required',
             'file_id' => 'required|integer|exists:files,id',
@@ -44,6 +45,7 @@ class CreateProductRequest extends FormRequest
             'product_price.required' => 'O preço do produto é obrigatório.',
             'file_id.required' => 'A imagem do produto é obrigatória.',
             'file_id.exists' => 'Imagem inválida.',
+            'product_description.max' => 'A descrição do produto deve ter no máximo 500 caracteres.',
         ];
     }
 }
