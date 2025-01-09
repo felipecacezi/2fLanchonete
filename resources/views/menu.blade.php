@@ -105,7 +105,7 @@
                     @foreach($products as $product)
                         <div class="rounded-xl border-2 border-gray-200 p-2 grid grid-cols-12 mb-8 gap-y-4 lg:p-4">
                             <div class="col-span-12 flex items-center justify-between">
-                                <div class="flex flex-col justify-start">
+                                <div class="flex flex-col justify-start flex-grow">
                                     <div class="flex flex-col justify-start">
                                         <h5 id="product_name_{{$product['id']}}" data-id="{{$product['id']}}" class="font-manrope font-bold text-1xl leading-9 text-gray-900">
                                             {{$product['product_name']}}
@@ -126,7 +126,7 @@
                                                     <path d="M4.5 9.5H13.5" stroke="" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                             </button>
-                                            <input type="text" id="quantity_{{$product['id']}}" class="products-quantity border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center" value="0">
+                                            <input type="text" id="quantity_{{$product['id']}}" class="products-quantity border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-3 bg-gray-100 text-center" value="0">
                                             <button price-id="product_price_{{$product['id']}}" input-id="quantity_{{$product['id']}}" data-id="{{$product['id']}}" class="add-product group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
                                                 <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M3.75 9.5H14.25M9 14.75V4.25" stroke="" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
@@ -135,11 +135,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="w-20 h-20">
-                                    <img src="{{$product['productImgUrl']}}" alt="" class="object-cover w-20 h-20 aspect-square rounded-2xl">
+                                <div class="w-20 h-20 flex-shrink-0">
+                                    <img src="{{$product['productImgUrl']}}" alt="" class="object-cover w-full h-full aspect-square rounded-2xl">
                                 </div>
                             </div>
-                        </div>                
+                        </div>
                     @endforeach
                 @endforeach
             @endif
