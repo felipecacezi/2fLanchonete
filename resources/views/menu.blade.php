@@ -102,41 +102,44 @@
             @if($productsFinal)
                 @foreach($productsFinal as $key => $products) 
                 <h1 class="font-manrope font-bold text-3xl leading-10 mb-8 text-start text-black">{{ $key }} </h1>
-                    @foreach($products as $product) 
-                        <div class="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">                        
-                        
-                            <div class="col-span-12 grid grid-cols-12 gap-4">
-                                <div class="col-span-3 md:col-span-2">
-                                    <img src="{{$product['productImgUrl']}}"
-                                        alt=""
-                                        class="object-cover w-full h-full aspect-square rounded-2xl md:h-40 md:w-40">
-                                </div>
-                                <div class="col-span-8 flex flex-col justify-center">
-                                    <h5 id="product_name_{{$product['id']}}" data-id="{{$product['id']}}" class="font-manrope font-bold text-2xl leading-9 text-gray-900">{{$product['product_name']}}</h5>
-                                </div>
-                            </div>
-
-                            <div class="col-span-12 lg:col-span-9 detail w-full lg:pl-3">
-                                <p class="font-normal text-base leading-7 text-gray-500 mb-6">{{$product['product_description']}}</p>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex items-center gap-4 mt-4">
-                                        <button price-id="product_price_{{$product['id']}}" input-id="quantity_{{$product['id']}}" data-id="{{$product['id']}}" class="sub-product group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
-                                            <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.5 9.5H13.5" stroke="" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="quantity_{{$product['id']}}" class="products-quantity border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center" value="0">
-                                        <button price-id="product_price_{{$product['id']}}" input-id="quantity_{{$product['id']}}" data-id="{{$product['id']}}" class="add-product group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
-                                            <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.75 9.5H14.25M9 14.75V4.25" stroke="" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
+                    @foreach($products as $product)
+                        <div class="rounded-xl border-2 border-gray-200 p-2 grid grid-cols-12 mb-8 gap-y-4 lg:p-4">
+                            <div class="col-span-12 flex items-center justify-between">
+                                <div class="flex flex-col justify-start">
+                                    <div class="flex flex-col justify-start">
+                                        <h5 id="product_name_{{$product['id']}}" data-id="{{$product['id']}}" class="font-manrope font-bold text-1xl leading-9 text-gray-900">
+                                            {{$product['product_name']}}
+                                        </h5>
                                     </div>
-                                    <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">R$ <span id="product_price_{{$product['id']}}">{{$product['product_price']}}</span></h6>
+                                    <div>
+                                        <small>{{$product['product_description']}}</small>
+                                    </div>
+                                    <div>
+                                        <small class="font-bold">
+                                            R$ <span id="product_price_{{$product['id']}}">{{$product['product_price']}}</span>
+                                        </small>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-4 mt-4">
+                                            <button price-id="product_price_{{$product['id']}}" input-id="quantity_{{$product['id']}}" data-id="{{$product['id']}}" class="sub-product group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
+                                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.5 9.5H13.5" stroke="" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" id="quantity_{{$product['id']}}" class="products-quantity border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center" value="0">
+                                            <button price-id="product_price_{{$product['id']}}" input-id="quantity_{{$product['id']}}" data-id="{{$product['id']}}" class="add-product group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
+                                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3.75 9.5H14.25M9 14.75V4.25" stroke="" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-20 h-20">
+                                    <img src="{{$product['productImgUrl']}}" alt="" class="object-cover w-20 h-20 aspect-square rounded-2xl">
                                 </div>
                             </div>
-
-                        </div>
+                        </div>                
                     @endforeach
                 @endforeach
             @endif
@@ -181,16 +184,16 @@
             tabindex="-1" 
             aria-hidden="true" 
             class="hidden fixed top-0 right-0 left-0 z-50 justify-center
-                    items-center w-full md:inset-0 h-modal md:h-full 
-                    bg-black bg-opacity-60 overflow-hidden md:overflow-y-hidden">
-            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto overflow-y-auto md:overflow-y-auto no-scrollbar max-h-screen">
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            items-center w-full md:inset-0 h-modal md:h-full 
+            bg-black bg-opacity-60 overflow-y-auto">
+            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto overflow-y-auto no-scrollbar max-h-screen">
+                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
                     
-                    <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
+                        <h3 class="text-lg font-semibold text-gray-900">
                             Detalhes do pedido
                         </h3>
-                        <button id="btn-close-modal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="updateProductModal">
+                        <button id="btn-close-modal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="updateProductModal">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             <span class="sr-only">Fechar</span>
                         </button>
@@ -333,9 +336,8 @@
                                 :value="__('Forma de pagamento')"/>
                             <select name="payment-method" 
                                 id="payment-method" 
-                                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 
-                                    dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 
-                                    focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                class="border-gray-300 focus:border-indigo-500 
+                                    focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="0">Selecione</option>
                                 <option value="D">Dinheiro</option>
                                 <option value="C">Cartão (Débito/Credito)</option>
