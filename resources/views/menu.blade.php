@@ -145,14 +145,17 @@
             @endif
         </section>
 
-        @if(
-            (strtotime($menuConfigs['menuconf_open']) <= strtotime('now') 
-            && strtotime($menuConfigs['menuconf_close']) >= strtotime('now'))
-            || (strtotime($menuConfigs['menuconf_lunch']) <= strtotime('now') 
-            && strtotime($menuConfigs['menuconf_reopen']) >= strtotime('now'))
-        )
+        <?php  
+            if (
+                strtotime($menuConfigs['menuconf_close']) >= strtotime(date('00:00:00'))
+                && strtotime($menuConfigs['menuconf_close']) <= strtotime(date('05:00:00'))
+            ) {
+                $menuConfigs['menuconf_close'] = date('23:59:59');
+            }
+        ?>
+        @if((strtotime('now') <= strtotime($menuConfigs['menuconf_lunch']) || strtotime('now') >= strtotime($menuConfigs['menuconf_reopen']))
+            && (strtotime('now') >= strtotime($menuConfigs['menuconf_open']) && strtotime('now') <= strtotime($menuConfigs['menuconf_close'])))
             <section class="flex flex-col w-full">
-
                 <div class="flex flex-col items-start w-full">
                     <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
                         Observação
