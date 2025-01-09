@@ -50,7 +50,8 @@ class MenuController extends Controller
                 }
             }
 
-            $menuConfigs = MenuConfig::leftJoin('files', 'menu_configs.file_id', '=', 'files.id')
+            $menuConfigs = MenuConfig::select()
+                ->leftJoin('files', 'menu_configs.file_id', '=', 'files.id')
                 ->first()
                 ->toArray();
             $menuConfigs['menu_cover_url'] = Storage::url($menuConfigs['file_path']);
