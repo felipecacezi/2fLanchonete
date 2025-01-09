@@ -145,40 +145,51 @@
             @endif
         </section>
 
-        <section class="flex flex-col w-full">
+        @if(
+            (strtotime($menuConfigs['menuconf_open']) <= strtotime('now') 
+            && strtotime($menuConfigs['menuconf_close']) >= strtotime('now'))
+            || (strtotime($menuConfigs['menuconf_lunch']) <= strtotime('now') 
+            && strtotime($menuConfigs['menuconf_reopen']) >= strtotime('now'))
+        )
+            <section class="flex flex-col w-full">
 
-            <div class="flex flex-col items-start w-full">
-                <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
-                    Observação
-                </h2>
-                <x-text-area id="order_obs" 
-                    name="order_obs" 
-                    type="text" 
-                    class="mt-1 block w-full" 
-                    autocomplete="current-password"
-                    placeholder="Ex.: Sem maionese, sem queijo etc..."
-                    rows="10">
-                    <x-slot:teste>{{ $configs->menuconf_description ?? '' }}</x-slot>
-                </x-text-area>
+                <div class="flex flex-col items-start w-full">
+                    <h2 class="font-manrope font-bold text-1xl leading-10 text-black">
+                        Observação
+                    </h2>
+                    <x-text-area id="order_obs" 
+                        name="order_obs" 
+                        type="text" 
+                        class="mt-1 block w-full" 
+                        autocomplete="current-password"
+                        placeholder="Ex.: Sem maionese, sem queijo etc..."
+                        rows="10">
+                        <x-slot:teste>{{ $configs->menuconf_description ?? '' }}</x-slot>
+                    </x-text-area>
+                </div>
+
+                <div class="flex items-start w-full">
+                    <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
+                        SubTotal: R$ <span id="subtotal">0,00</span>
+                    </h6>
+                </div>
+
+
+                <div class="mt-5 mb-5 ">                
+                    <button id="btn-checkout"
+                            class="rounded-full py-4 px-6 bg-indigo-600 text-white 
+                                font-semibold text-lg w-full text-center transition-all 
+                                duration-500 hover:bg-indigo-700 ">
+                        Fazer Pedido
+                    </button>               
+                </div>
+            </section>
+        @else
+            <div class="bg-gray-100 border-l-4 border-gray-500 text-gray-700 p-4 mb-4" role="alert">
+                <p class="font-bold">Atenção</p>
+                <p>O restaurante ainda não está recebendo pedidos no momento.</p>
             </div>
-
-            <div class="flex items-start w-full">
-                <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
-                    SubTotal: R$ <span id="subtotal">0,00</span>
-                </h6>
-            </div>
-
-
-            <div class="mt-5 mb-5 ">
-                <button id="btn-checkout"
-                        class="rounded-full py-4 px-6 bg-indigo-600 text-white 
-                            font-semibold text-lg w-full text-center transition-all 
-                            duration-500 hover:bg-indigo-700 ">
-                    Fazer Pedido
-                </button>
-            </div>
-        </section>
-
+        @endif
         <!-- modal checkout -->
         <div id="modalCheckout" 
             tabindex="-1" 
