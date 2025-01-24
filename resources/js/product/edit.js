@@ -137,17 +137,22 @@ const loadProductImage = ()=>{
 }
 
 elmntStore.addEventListener('click', ()=>{
+    const fileId = document.getElementById('dropzone-file').getAttribute('data-id');    
+    console.log(fileId);
+
+    let data = {
+        'id': elmntId.value,
+        'product_name': elmntName.value,
+        'product_price': elmntPrice.value,
+        'product_description': elmntDescription.value,
+        'category_id': elmntCategoryId.value,
+        'product_active': elmntActive.checked ? 'a' : 'i',
+        'file_id': fileId
+    }
+    
     axios.put(
         "/product", 
-        {
-            'id': elmntId.value,
-            'product_name': elmntName.value,
-            'product_price': elmntPrice.value,
-            'product_description': elmntDescription.value,
-            'category_id': elmntCategoryId.value,
-            'product_active': elmntActive.checked ? 'a' : 'i',
-            'file_id': elmntFileId.value
-        }, 
+        data, 
         {
             headers: {
                 'Content-Type': 'application/json',
@@ -198,6 +203,7 @@ elmntFile.addEventListener('change', ()=>{
         )
         .then(response => {
             const data = response.data.data;
+            const elmntFile = document.getElementById('dropzone-file');            
             elmntFile.setAttribute('data-id', data.fileId);
             elmntFile.setAttribute('data-path', data.filePath);
         })

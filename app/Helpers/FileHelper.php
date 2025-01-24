@@ -19,7 +19,7 @@ class FileHelper
         } else {
             $path = '';
         }
-        
+
         return $path;
     }
 
