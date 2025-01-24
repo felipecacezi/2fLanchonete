@@ -96,12 +96,12 @@ class ProductController extends Controller
             $request->validated();
             $data = $request->all();
             $arProduct = Product::find($request->id);
-
             if (!$arProduct) {
                 throw new \Exception('Impossível editar o produto, motivo: produto não encontrado', 404);
             }
             $data['product_price'] = Currency::convertRealToCents($data['product_price']);
             unset($request->id);
+            $arProduct->file_id = $data['file_id'];
             $arProduct->update($data);
 
             return response(
