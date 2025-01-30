@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::domain('localhost')->group(function () {
+Route::domain(request()->getHost())->group(function () {
     Route::get('/', function () {
         return view('website.index');
     });
