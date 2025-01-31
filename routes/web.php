@@ -1,8 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Helpers\GetMainDomain;
 
-Route::domain(request()->getHost())->group(function () {
+$host = request()->getHost();
+$parts = explode('.', $host);
+$domain = count($parts) == 1 ? $parts[0] : $parts[1];
+
+Route::domain($domain)->group(function () {
     Route::get('/', function () {
         return view('website.index');
     });
